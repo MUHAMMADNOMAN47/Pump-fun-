@@ -1,1 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DUDDY ($DDY) — Official</title>
+  <meta name="description" content="DUDDY ($DDY) on Solana — Official website. Verify contract address before trading." />
 
+  <style>
+    :root{
+      --bg1:#070519;
+      --bg2:#0B1030;
+      --card:rgba(255,255,255,.06);
+      --stroke:rgba(255,255,255,.10);
+      --text:#E9E6FF;
+      --muted:rgba(233,230,255,.72);
+      --green:#2CCE6E;
+      --teal:#1A988D;
+      --purple:#9F52CB;
+      --gold:#DBA560;
+
+      --grad: linear-gradient(90deg,var(--green) 0%, var(--teal) 55%, var(--purple) 100%);
+      --bggrad: linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 55%, var(--bg1) 100%);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background: var(--bggrad);
+      overflow-x:hidden;
+    }
+
+    .wrap{
+      width:min(1100px,92vw);
+      margin:0 auto;
+      padding:20px 0 60px;
+    }
+
+    /* Top banner */
+    .banner{
+      width:100%;
+      border-radius:18px;
+      border:1px solid var(--stroke);
+      overflow:hidden;
+      background: rgba(0,0,0,.25);
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+    }
+    .banner img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+
+    /* Header row */
+    .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin:18px 0 8px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .logo{
+      width:58px;
+      height:58px;
+      border-radius:16px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.04);
+      overflow:hidden;
+      flex:0 0 auto;
+    }
+    .logo img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .title{
+      line-height:1.1;
+    }
+    .title h1{
+      margin:0;
+      font-size:26px;
+      letter-spacing:.4px;
+    }
+    .title p{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .tick{
+      background: var(--grad);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      font-weight:800;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      padding:11px 14px;
+      border-radius:14px;
+      text-decoration:none;
+      font-weight:700;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      transition:.15s ease;
+      cursor:pointer;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.09);}
+    .btn.primary{
+      border:0;
+      background: var(--grad);
+      color:#05030f;
+    }
+    .btn.small{padding:10px 12px; border-radius:12px; font-weight:700;}
+
+    /* Sections */
+    .grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:16px;
+      margin-top:14px;
+    }
+    @media (max-width: 900px){
+      .grid{grid-template-columns:1fr}
+      .top{flex-direction:column; align-items:flex-start}
+      .actions{justify-content:flex-start}
+    }
+
+    .card{
+      border:1px solid var(--stroke);
+      background: var(--card);
+      border-radius:18px;
+      padding:18px;
+      box-shadow: 0 16px 40px rgba(0,0,0,.25);
+      backdrop-filter: blur(10px);
+    }
+
+    .card h2{
+      margin:0 0 10px;
+      font-size:20px;
+      letter-spacing:.3px;
+    }
+    .card p{
+      margin:0 0 12px;
+      color:var(--muted);
+      line-height:1.45;
+      font-size:14.5px;
+    }
+
+    .meta{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .pill{
+      border:1px solid var(--stroke);
+      background: rgba(0,0,0,.18);
+      padding:10px 12px;
+      border-radius:14px;
+      font-size:13px;
+      color:rgba(233,230,255,.88);
+    }
+    .pill b{color:#fff}
+
+    /* Contract */
+    .contractBox{
+      margin-top:12px;
+      border:1px solid rgba(44,206,110,.35);
+      background: rgba(0,0,0,.20);
+      border-radius:16px;
+      padding:14px;
+    }
+
+    .contractRow{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .contractAddr{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size:14px;
+      color: rgba(233,230,255,.95);
+      overflow-wrap:anywhere;
+      word-break:break-word;
+      flex:1 1 380px;
+      padding:10px 12px;
+      border-radius:14px;
+      background: rgba(255,255,255,.05);
+      border:1px solid var(--stroke);
+    }
+
+    .copyBtn{
+      padding:11px 14px;
+      border-radius:14px;
+      border:0;
+      font-weight:800;
+      cursor:pointer;
+      background: var(--grad);
+      color:#05030f;
+      flex:0 0 auto;
+    }
+    .warn{
+      margin-top:12px;
+      color: rgba(255,255,255,.78);
+      font-size:13px;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .warn span{
+      display:inline-flex;
+      width:26px;height:26px;
+      border-radius:10px;
+      align-items:center;justify-content:center;
+      background: rgba(219,165,96,.18);
+      border:1px solid rgba(219,165,96,.35);
+      color: var(--gold);
+      flex:0 0 auto;
+      font-weight:900;
+    }
+
+    /* Chart */
+    .chartWrap{
+      margin-top:14px;
+      overflow:hidden;
+      border-radius:16px;
+      border:1px solid var(--stroke);
+      background: rgba(0,0,0,.22);
+    }
+
+    iframe{
+      width:100%;
+      height:520px;
+      border:0;
+      display:block;
+    }
+    @media (max-width: 600px){
+      iframe{height:520px;}
+    }
+
+    .links{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .footer{
+      margin-top:22px;
+      color: rgba(233,230,255,.62);
+      font-size:12.5px;
+      text-align:center;
+    }
+
+    .hr{
+      height:1px;
+      background: rgba(255,255,255,.10);
+      margin:14px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- Banner -->
+    <div class="banner">
+      <!-- You can replace this src with your banner file path -->
+      <img src="duddy_banner_1500x600_green_fixed.png" alt="DUDDY banner">
+    </div>
+
+    <!-- Top bar -->
+    <div class="top">
+      <div class="brand">
+        <div class="logo">
+          <!-- Use your transparent logo file name if you have it in repo -->
+          <img src="duddy-logo-transparent.png" alt="DUDDY logo">
+        </div>
+        <div class="title">
+          <h1>DUDDY <span class="tick">$DDY</span></h1>
+          <p>One dog. One ticker. One pack — built for culture, fun, and real meme stamina.</p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a class="btn primary" href="https://pump.fun/" target="_blank" rel="noreferrer">Buy on Pump.fun</a>
+        <a class="btn" href="#chart">Live Chart</a>
+        <a class="btn" href="mailto:official@duddy.fun">official@duddy.fun</a>
+      </div>
+    </div>
+
+    <div class="grid">
+
+      <!-- Left: Contract + info -->
+      <div class="card">
+        <h2>Official Contract Address</h2>
+        <p>Always verify the contract before trading. DDY is live on Solana.</p>
+
+        <div class="contractBox">
+          <div class="contractRow">
+            <div id="contract" class="contractAddr">
+              8M3CJC3QzKbaLcCFmyYZGVVZ5MgPVN9DNQatSLNUpump
+            </div>
+
+            <button class="copyBtn" onclick="copyContract()">Copy</button>
+          </div>
+
+          <div class="warn">
+            <span>!</span>
+            <div>Beware of fake tokens. Name and logo can be copied — contract address cannot.</div>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="meta">
+          <div class="pill"><b>Chain:</b> Solana</div>
+          <div class="pill"><b>Launch:</b> Pump.fun</div>
+          <div class="pill"><b>Website:</b> duddy.fun</div>
+          <div class="pill"><b>Official Email:</b> official@duddy.fun</div>
+        </div>
+
+        <div class="links">
+          <!-- Your community links (already saved in your memory) -->
+          <a class="btn small" href="https://x.com/official_duddy" target="_blank" rel="noreferrer">X/Twitter</a>
+          <a class="btn small" href="https://t.me/duddyofficial_ddy" target="_blank" rel="noreferrer">Telegram</a>
+          <a class="btn small" href="https://discord.gg/aKgK2RDep" target="_blank" rel="noreferrer">Discord</a>
+          <a class="btn small" href="https://whatsapp.com/channel/0029VbBmrsNHLHQY5eylWR2d" target="_blank" rel="noreferrer">WhatsApp</a>
+        </div>
+      </div>
+
+      <!-- Right: Chart -->
+      <div id="chart" class="card">
+        <h2>Live Chart</h2>
+        <p>
+          If Pump.fun chart embed works, it will show here. If it’s blocked, DexScreener chart will load automatically.
+        </p>
+
+        <div class="chartWrap">
+          <!-- 1) Try Pump.fun embed (may be blocked by Pump.fun) -->
+          <iframe
+            id="pumpIframe"
+            src="https://pump.fun/"
+            loading="lazy"
+            referrerpolicy="no-referrer"
+            title="Pump.fun chart"
+          ></iframe>
+        </div>
+
+        <div class="links">
+          <a class="btn small" href="https://pump.fun/" target="_blank" rel="noreferrer">Open on Pump.fun</a>
+        </div>
+
+        <div class="hr"></div>
+
+        <h2>Backup Chart (DexScreener)</h2>
+        <p>Ye backup chart normally website pe embed ho jata hai.</p>
+
+        <div class="chartWrap">
+          <!-- 2) DexScreener embed (works most of the time) -->
+          <!-- If you have a DexScreener token link, replace it in src. -->
+          <iframe
+            id="dexIframe"
+            src="https://dexscreener.com/solana/8M3CJC3QzKbaLcCFmyYZGVVZ5MgPVN9DNQatSLNUpump?embed=1&theme=dark"
+            loading="lazy"
+            title="DexScreener chart"
+          ></iframe>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="footer">
+      © <span id="year"></span> DUDDY ($DDY). Verify contract address before trading.
+    </div>
+
+  </div>
+
+  <script>
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Copy
+    function copyContract(){
+      const text = document.getElementById("contract").innerText.trim();
+      navigator.clipboard.writeText(text).then(()=>{
+        alert("Contract copied!");
+      }).catch(()=>{
+        // fallback
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        alert("Contract copied!");
+      });
+    }
+
+    // Pump.fun embed fallback logic:
+    // If pump.fun iframe fails/blocked, user will still have Dex chart below.
+    // (Browsers don't always fire a clean error for blocked iframes — so we keep both.)
+  </script>
+</body>
+</html>
