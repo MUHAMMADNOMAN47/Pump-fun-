@@ -3,56 +3,56 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>DUDDY — Docs</title>
+  <title>DUDDY ($DDY) — Solana</title>
 
-  <!-- Fonts -->
+  <!-- Fonts (clean + bold like modern studios) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* DUDDY palette */
-      --g1:#2CCE6E;
-      --g2:#1A988D;
-      --b1:#1A628F;
-      --p1:#9F52CB;
-      --p2:#6151A6;
+      /* Your brand palette */
+      --g:#2CCE6E;
+      --t:#1A988D;
+      --b:#1A628F;
+      --p:#9F52CB;
+      --v:#6151A6;
 
-      --bg0:#070519;
-      --bg1:#0B1030;
+      --bg:#070519;
+      --bg2:#0B1030;
 
       --ink:#F6F1DC;
       --muted: rgba(246,241,220,.68);
 
-      /* WALRUS-like crisp glass */
+      /* Walrus-inspired contrast */
       --panel: rgba(255,255,255,.06);
-      --panel2: rgba(255,255,255,.08);
+      --panel2: rgba(255,255,255,.085);
       --stroke: rgba(255,255,255,.12);
       --stroke2: rgba(255,255,255,.18);
 
-      /* less rounded, more “square box” */
-      --r1: 18px;
-      --r2: 22px;
+      --r: 22px;
+      --r2: 28px;
 
-      --grad: linear-gradient(90deg,var(--g1) 0%, var(--g2) 55%, var(--p1) 100%);
+      --grad: linear-gradient(90deg, var(--g) 0%, var(--t) 55%, var(--p) 100%);
       --bggrad: radial-gradient(1200px 700px at 20% 10%, rgba(97,81,166,.18), transparent 60%),
-                radial-gradient(900px 600px at 85% 15%, rgba(44,206,110,.16), transparent 55%),
-                linear-gradient(180deg,var(--bg0) 0%, var(--bg1) 55%, var(--bg0) 100%);
+                radial-gradient(900px 600px at 85% 15%, rgba(44,206,110,.14), transparent 55%),
+                linear-gradient(180deg, var(--bg) 0%, var(--bg2) 55%, var(--bg) 100%);
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background: var(--bggrad);
       color: var(--ink);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       overflow-x:hidden;
+      scroll-behavior:smooth;
     }
 
-    /* subtle grid like walrus sections (very low) */
-    body:before{
+    /* Subtle grid overlay (Walrus-like) */
+    body::before{
       content:"";
       position:fixed; inset:0;
       pointer-events:none;
@@ -60,31 +60,46 @@
         linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
       background-size: 90px 90px;
-      opacity:.08;
+      opacity:.09;
       mix-blend-mode: overlay;
     }
 
+    /* Smooth reveal */
+    .reveal{
+      opacity:0;
+      transform: translateY(12px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.show{
+      opacity:1;
+      transform: translateY(0);
+    }
+
     .wrap{
-      max-width: 1020px;
-      margin: 0 auto;
-      padding: 16px 14px 44px;
+      width:min(1120px, 100%);
+      margin:0 auto;
+      padding: 16px 14px 70px;
       position:relative;
     }
 
-    /* Top bar (clean, no extra text) */
-    .topbar{
+    /* NAV */
+    .nav{
+      position:sticky;
+      top:12px;
+      z-index:50;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
-      padding: 14px 14px;
+      padding: 12px 12px;
       border-radius: var(--r2);
-      border: 1px solid var(--stroke);
       background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border:1px solid var(--stroke);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      box-shadow: 0 16px 48px rgba(0,0,0,.42);
+      box-shadow: 0 18px 55px rgba(0,0,0,.42);
     }
+
     .brand{
       display:flex;
       align-items:center;
@@ -95,21 +110,20 @@
       width:44px; height:44px;
       object-fit:contain;
       border-radius: 14px;
+      padding:6px;
       background: rgba(0,0,0,.18);
       border: 1px solid rgba(255,255,255,.10);
-      padding:6px;
     }
-    .brand .name{
-      font-family:"Space Grotesk", Inter, system-ui;
-      font-size: 18px;
+    .brand .title{
+      font-family: "Space Grotesk", Inter, system-ui;
+      font-weight:700;
       letter-spacing:.3px;
-      line-height:1;
+      line-height:1.05;
+      white-space:nowrap;
     }
-    .subchips{
-      display:flex;
-      gap:8px;
-      margin-top:6px;
-      flex-wrap:wrap;
+    .chips{
+      display:flex; gap:8px; flex-wrap:wrap;
+      margin-top:4px;
     }
     .chip{
       font-size:12px;
@@ -120,327 +134,568 @@
       color: rgba(246,241,220,.78);
       white-space:nowrap;
     }
-    .chip.live::before{
+    .chip.dot::before{
       content:"";
-      width:7px;height:7px;border-radius:99px;
-      display:inline-block;margin-right:8px;
-      background: var(--g1);
+      display:inline-block;
+      width:7px;height:7px;
+      border-radius:99px;
+      margin-right:8px;
+      background: var(--g);
       box-shadow: 0 0 12px rgba(44,206,110,.55);
       vertical-align:middle;
     }
 
-    .actions{display:flex; gap:10px; align-items:center;}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding: 11px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.18);
-      color: var(--ink);
+    .navlinks{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .a{
       text-decoration:none;
+      color: rgba(246,241,220,.85);
       font-weight:600;
       font-size:14px;
-      transition: transform .18s ease, background .18s ease, border-color .18s ease;
-      white-space:nowrap;
-    }
-    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18); }
-    .btn.primary{
-      background: var(--grad);
-      color: #071018;
-      border-color: rgba(255,255,255,.14);
-      box-shadow: 0 16px 40px rgba(44,206,110,.10), 0 16px 40px rgba(159,82,203,.10);
-    }
-
-    /* Section header block (NO "DUDDY Docs" title) */
-    .panel{
-      margin-top: 14px;
-      padding: 16px 14px;
-      border-radius: var(--r2);
-      border: 1px solid var(--stroke);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      box-shadow: 0 18px 52px rgba(0,0,0,.40);
-    }
-
-    .panel .row{
-      display:flex; gap:12px; align-items:center; flex-wrap:wrap;
-      justify-content:space-between;
-    }
-
-    /* “Walrus-like” colored blocks (3 accents) */
-    .blocks{
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
-    .block{
       padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.18);
-      color: rgba(246,241,220,.82);
-      font-size: 13px;
-      font-weight:600;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
     }
-    .block.a{ box-shadow: inset 0 0 0 1px rgba(44,206,110,.18); }
-    .block.b{ box-shadow: inset 0 0 0 1px rgba(26,152,141,.18); }
-    .block.c{ box-shadow: inset 0 0 0 1px rgba(159,82,203,.18); }
+    .a:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.16);
+    }
+    .btn{
+      text-decoration:none;
+      color:#061018;
+      font-weight:700;
+      font-size:14px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--grad);
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: 0 16px 40px rgba(44,206,110,.10), 0 16px 40px rgba(159,82,203,.10);
+      position:relative;
+      overflow:hidden;
+    }
+    .btn::after{
+      content:"";
+      position:absolute; inset:-40px;
+      background: radial-gradient(circle at 20% 30%, rgba(255,255,255,.75), transparent 45%);
+      transform: translateX(-55%);
+      opacity:.22;
+      animation: sweep 2.6s ease-in-out infinite;
+    }
+    @keyframes sweep{
+      0%,100%{ transform: translateX(-55%); }
+      50%{ transform: translateX(35%); }
+    }
 
-    /* Search (clean) */
-    .search{
-      margin-top: 12px;
+    /* Mobile menu */
+    .menuBtn{
+      display:none;
+      width:44px;height:44px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      color: var(--ink);
+      font-size:18px;
+      align-items:center;
+      justify-content:center;
+    }
+    @media (max-width: 860px){
+      .navlinks{ display:none; }
+      .menuBtn{ display:flex; }
+      .drawer{
+        display:none;
+        margin-top:10px;
+        padding: 12px;
+        border-radius: var(--r2);
+        border:1px solid var(--stroke);
+        background: rgba(0,0,0,.20);
+      }
+      .drawer.show{ display:block; }
+      .drawer .a, .drawer .btn{ display:block; text-align:center; margin:8px 0; }
+    }
+
+    /* HERO (Walrus-inspired big type, clean) */
+    .hero{
+      margin-top: 18px;
+      padding: 26px 18px;
+      border-radius: var(--r2);
+      border:1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: 0 20px 65px rgba(0,0,0,.45);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:-120px;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(44,206,110,.18), transparent 55%),
+        radial-gradient(circle at 80% 25%, rgba(159,82,203,.16), transparent 55%),
+        radial-gradient(circle at 50% 90%, rgba(26,152,141,.14), transparent 55%);
+      filter: blur(12px);
+      opacity:.9;
+      pointer-events:none;
+    }
+
+    .kicker{
+      position:relative;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom: 14px;
+    }
+    .pill{
+      font-weight:700;
+      letter-spacing:.2px;
+      font-size:12px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      color: rgba(246,241,220,.80);
+    }
+    .pill.grad{
+      background: var(--grad);
+      color:#061018;
+      border-color: rgba(255,255,255,.14);
+    }
+
+    h1{
+      position:relative;
+      margin:0;
+      font-family:"Space Grotesk", Inter, system-ui;
+      font-size: clamp(34px, 6.2vw, 64px);
+      line-height: 1.0;
+      letter-spacing:.2px;
+    }
+    .sub{
+      position:relative;
+      margin: 14px 0 0;
+      color: var(--muted);
+      max-width: 60ch;
+      font-size: 15.5px;
+      line-height:1.55;
+    }
+
+    .heroActions{
+      position:relative;
+      margin-top: 18px;
       display:flex;
       gap:10px;
       flex-wrap:wrap;
     }
-    .searchbox{
-      flex: 1 1 260px;
-      display:flex; align-items:center; gap:10px;
-      padding: 12px 14px;
-      border-radius: var(--r1);
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.20);
-      color: rgba(246,241,220,.72);
+
+    /* SECTION blocks like Walrus panels */
+    .section{
+      margin-top: 16px;
+      border-radius: var(--r2);
+      border:1px solid var(--stroke);
+      background: rgba(0,0,0,.18);
+      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+      overflow:hidden;
     }
-    .searchbox input{
-      width:100%;
-      border:none; outline:none;
-      background:transparent;
-      color: rgba(246,241,220,.90);
-      font-size:14px;
+    .sectionHead{
+      padding: 16px 16px 12px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
     }
-    .kbd{
-      font-size:12px;
-      padding: 6px 10px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.05);
-      color: rgba(246,241,220,.60);
-      white-space:nowrap;
+    .sectionHead h2{
+      margin:0;
+      font-family:"Space Grotesk", Inter, system-ui;
+      font-size: 22px;
+      letter-spacing:.2px;
+    }
+    .sectionHead p{
+      margin:0;
+      color: rgba(246,241,220,.62);
+      font-size: 13px;
+      max-width: 60ch;
     }
 
-    /* Cards (bigger, squarer, walrus-like) */
     .grid{
-      margin-top: 14px;
       display:grid;
       grid-template-columns: 1fr;
       gap: 12px;
+      padding: 14px;
+    }
+    @media (min-width: 920px){
+      .grid{ grid-template-columns: 1.2fr .8fr; }
     }
 
-    .card{
-      text-decoration:none;
-      color: var(--ink);
-      border-radius: var(--r2);
-      border: 1px solid var(--stroke);
-      background: rgba(0,0,0,.18);
-      box-shadow: 0 18px 50px rgba(0,0,0,.45);
+    /* Media panel (Walrus feel: big visual area) */
+    .media{
+      border-radius: var(--r);
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
       overflow:hidden;
       position:relative;
-      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      min-height: 260px;
     }
-
-    /* accent top strip like brand panels */
-    .card::before{
-      content:"";
-      position:absolute;
-      left:0; top:0; right:0;
-      height: 4px;
+    .media .stripe{
+      position:absolute; left:0; top:0; right:0; height:4px;
       background: var(--grad);
-      opacity:.85;
+      opacity:.9;
+    }
+    .media .content{
+      padding: 18px 16px 16px;
+      position:relative;
+    }
+    .media .big{
+      font-family:"Space Grotesk", Inter, system-ui;
+      font-weight:700;
+      font-size: 32px;
+      line-height:1.05;
+      margin: 4px 0 10px;
+      letter-spacing:.2px;
+    }
+    .media .desc{
+      color: var(--muted);
+      line-height:1.55;
+      max-width: 56ch;
+      margin:0;
     }
 
+    /* Cards column */
+    .cards{
+      display:grid;
+      gap:12px;
+      grid-template-columns: 1fr;
+    }
+    .card{
+      border-radius: var(--r);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding: 14px 14px;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      position:relative;
+      overflow:hidden;
+    }
     .card:hover{
       transform: translateY(-2px);
-      border-color: var(--stroke2);
-      background: rgba(255,255,255,.06);
+      background: rgba(255,255,255,.075);
+      border-color: rgba(255,255,255,.18);
     }
-
-    .cardInner{
-      padding: 18px 16px 16px;
+    .card .top{
       display:flex;
-      gap:12px;
-      align-items:flex-start;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
     }
-
-    .icon{
-      width:52px; height:52px;
-      border-radius: 16px;
-      display:grid; place-items:center;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      font-size: 22px;
-      flex:0 0 auto;
+    .tag{
+      font-size:12px;
+      padding:7px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.10);
+      color: rgba(246,241,220,.75);
+      font-weight:600;
     }
-
-    .meta{ flex:1; min-width:0; }
-    .meta h3{
-      margin:0;
+    .card h3{
+      margin: 10px 0 6px;
       font-family:"Space Grotesk", Inter, system-ui;
       font-size: 18px;
       letter-spacing:.2px;
     }
-    .meta p{
-      margin: 7px 0 0;
-      color: var(--muted);
-      line-height:1.45;
+    .card p{
+      margin:0;
+      color: rgba(246,241,220,.65);
+      line-height:1.5;
       font-size: 13.5px;
     }
-
-    .go{
-      width:46px; height:46px;
-      border-radius: 16px;
-      display:grid; place-items:center;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      flex:0 0 auto;
-      transition: transform .18s ease;
-    }
-    .card:hover .go{ transform: translateX(2px); }
-
-    @media (min-width: 900px){
-      .grid{ grid-template-columns: 1fr 1fr; }
+    .card a{
+      display:inline-block;
+      margin-top: 10px;
+      text-decoration:none;
+      color: rgba(246,241,220,.85);
+      font-weight:700;
+      border-bottom: 1px dashed rgba(246,241,220,.25);
     }
 
-    .foot{
-      margin-top: 14px;
+    /* Tokenomics row */
+    .tokenRow{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+      padding: 14px;
+    }
+    @media (min-width: 920px){
+      .tokenRow{ grid-template-columns: 1fr 1fr 1fr; }
+    }
+    .stat{
+      border-radius: var(--r);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      padding: 14px;
+      position:relative;
+      overflow:hidden;
+    }
+    .stat::before{
+      content:"";
+      position:absolute; left:0; top:0; right:0; height:4px;
+      background: var(--grad);
+      opacity:.85;
+    }
+    .stat b{
+      font-family:"Space Grotesk", Inter, system-ui;
+      font-size: 22px;
+      letter-spacing:.2px;
+    }
+    .stat small{
+      display:block;
+      color: rgba(246,241,220,.62);
+      margin-top:6px;
+      line-height:1.4;
+    }
+
+    /* Footer */
+    footer{
+      margin-top: 18px;
+      padding: 10px 2px 0;
       color: rgba(246,241,220,.55);
       font-size: 12px;
       display:flex;
       justify-content:space-between;
-      gap:10px;
       flex-wrap:wrap;
-      padding: 8px 2px 0;
+      gap:10px;
     }
-    .foot a{
+    footer a{
       color: rgba(246,241,220,.65);
       text-decoration:none;
       border-bottom: 1px dashed rgba(246,241,220,.25);
     }
-    .foot a:hover{ color: rgba(246,241,220,.92); }
+    footer a:hover{ color: rgba(246,241,220,.92); }
   </style>
 </head>
 
 <body>
   <div class="wrap">
 
-    <!-- TOPBAR (logo only once) -->
-    <div class="topbar">
+    <!-- NAV -->
+    <div class="nav reveal">
       <div class="brand">
         <img src="assets/duddy_logo_transparent.png" alt="DUDDY logo" />
         <div>
-          <div class="name">DUDDY</div>
-          <div class="subchips">
-            <span class="chip live">$DDY</span>
+          <div class="title">DUDDY</div>
+          <div class="chips">
+            <span class="chip dot">$DDY</span>
             <span class="chip">SOLANA</span>
           </div>
         </div>
       </div>
 
-      <div class="actions">
-        <a class="btn" href="https://duddy.fun">Home</a>
-        <a class="btn primary" href="https://duddy.fun" target="_blank" rel="noreferrer">⚡ Buy $DDY</a>
+      <div class="navlinks">
+        <a class="a" href="#about">About</a>
+        <a class="a" href="#docs">Docs</a>
+        <a class="a" href="#tokenomics">Tokenomics</a>
+        <a class="a" href="#community">Community</a>
+        <!-- replace buy link -->
+        <a class="btn" href="https://duddy.fun" target="_blank" rel="noreferrer">⚡ Buy $DDY</a>
       </div>
+
+      <button class="menuBtn" id="menuBtn" aria-label="Open menu">☰</button>
     </div>
 
-    <!-- CLEAN PANEL (no big heading) -->
-    <section class="panel">
-      <div class="row">
-        <div class="blocks">
-          <div class="block a">Official: duddy.fun</div>
-          <div class="block b">Docs Hub</div>
-          <div class="block c">Community First</div>
-        </div>
+    <div class="drawer" id="drawer">
+      <a class="a" href="#about">About</a>
+      <a class="a" href="#docs">Docs</a>
+      <a class="a" href="#tokenomics">Tokenomics</a>
+      <a class="a" href="#community">Community</a>
+      <a class="btn" href="https://duddy.fun" target="_blank" rel="noreferrer">⚡ Buy $DDY</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero reveal">
+      <div class="kicker">
+        <span class="pill">Community-Led</span>
+        <span class="pill">Meme • Brand • Culture</span>
+        <span class="pill grad">Official: duddy.fun</span>
       </div>
 
-      <div class="search">
-        <div class="searchbox">
-          🔎
-          <input id="search" type="text" placeholder="Search (whitepaper, tokenomics, staking...)" />
-          <span class="kbd">Ctrl / ⌘ K</span>
+      <h1>Build memes. <br/>Move with confidence.</h1>
+      <p class="sub">
+        DUDDY ($DDY) is a Solana memecoin built like a real brand — clean docs, clear goals, and a community that actually shows up.
+        No childish UI. Just a smooth, premium experience.
+      </p>
+
+      <div class="heroActions">
+        <a class="btn" href="#docs">Open Docs</a>
+        <a class="a" href="#community">Join Community</a>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section reveal">
+      <div class="sectionHead">
+        <div>
+          <h2>What is DUDDY?</h2>
+          <p>A memecoin with brand discipline — designed to be recognizable, consistent, and built for the long run.</p>
+        </div>
+        <span class="chip">Brand-first design</span>
+      </div>
+
+      <div class="grid">
+        <div class="media">
+          <div class="stripe"></div>
+          <div class="content">
+            <div class="big">A clean product page<br/>for a meme coin.</div>
+            <p class="desc">
+              Walrus-style smoothness, but DDY tone. Dark base. Accent gradient. Bold sections. Everything readable on mobile.
+            </p>
+          </div>
+        </div>
+
+        <div class="cards">
+          <div class="card">
+            <div class="top">
+              <span class="tag">01</span>
+              <span class="tag">Transparency</span>
+            </div>
+            <h3>Clear information</h3>
+            <p>Short, direct, and investor-friendly. No walls of hype, no confusing layouts.</p>
+          </div>
+
+          <div class="card">
+            <div class="top">
+              <span class="tag">02</span>
+              <span class="tag">Design System</span>
+            </div>
+            <h3>One consistent tone</h3>
+            <p>Same colors, same spacing, same vibe — across landing, docs, and community visuals.</p>
+          </div>
+
+          <div class="card">
+            <div class="top">
+              <span class="tag">03</span>
+              <span class="tag">Mobile First</span>
+            </div>
+            <h3>Feels premium on phone</h3>
+            <p>Big type, clean panels, and smooth motion — made for real users, not screenshots.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- DOCS CARDS -->
-    <div class="grid" id="cards">
-
-      <a class="card" href="whitepaper.html">
-        <div class="cardInner">
-          <div class="icon">📄</div>
-          <div class="meta">
-            <h3>Whitepaper</h3>
-            <p>Project overview, goals, transparency rules, and what DDY is building long-term.</p>
-          </div>
-          <div class="go">↗</div>
+    <!-- DOCS -->
+    <section id="docs" class="section reveal">
+      <div class="sectionHead">
+        <div>
+          <h2>Docs Hub</h2>
+          <p>Everything important in one place. Keep it tight, keep it clean.</p>
         </div>
-      </a>
-
-      <a class="card" href="roadmap-tokenomics.html">
-        <div class="cardInner">
-          <div class="icon">🧭</div>
-          <div class="meta">
-            <h3>Roadmap + Tokenomics</h3>
-            <p>Phases + supply allocation explained clearly — simple, clean, and investor friendly.</p>
-          </div>
-          <div class="go">↗</div>
-        </div>
-      </a>
-
-      <a class="card" href="staking.html">
-        <div class="cardInner">
-          <div class="icon">💎</div>
-          <div class="meta">
-            <h3>Staking</h3>
-            <p>Rewards, lock logic, and how the staking system grows with the ecosystem.</p>
-          </div>
-          <div class="go">↗</div>
-        </div>
-      </a>
-
-      <a class="card" href="brand-kit.html">
-        <div class="cardInner">
-          <div class="icon">🎨</div>
-          <div class="meta">
-            <h3>Brand Kit</h3>
-            <p>Official assets, colors, and guidelines for community posts & creatives.</p>
-          </div>
-          <div class="go">↗</div>
-        </div>
-      </a>
-
-    </div>
-
-    <div class="foot">
-      <div>© <span id="year"></span> DUDDY</div>
-      <div>
-        <a href="https://x.com/official_duddy" target="_blank" rel="noreferrer">X</a> ·
-        <a href="https://t.me/duddyofficial_ddy" target="_blank" rel="noreferrer">Telegram</a> ·
-        <a href="https://discord.gg/aKgK2RDep" target="_blank" rel="noreferrer">Discord</a>
+        <span class="chip dot">Live soon</span>
       </div>
-    </div>
+
+      <div class="tokenRow">
+        <div class="stat">
+          <b>Whitepaper</b>
+          <small>Vision, approach, transparency rules, and what DDY is building.</small>
+        </div>
+        <div class="stat">
+          <b>Roadmap</b>
+          <small>Phased goals with measurable milestones (no fantasy promises).</small>
+        </div>
+        <div class="stat">
+          <b>Brand Kit</b>
+          <small>Logo, colors, and assets so everyone posts consistent DDY visuals.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOKENOMICS -->
+    <section id="tokenomics" class="section reveal">
+      <div class="sectionHead">
+        <div>
+          <h2>Tokenomics</h2>
+          <p>Simple allocation. Clear purpose. Built for liquidity and long-term community incentives.</p>
+        </div>
+        <span class="chip">Total Supply: 1,000,000,000</span>
+      </div>
+
+      <div class="tokenRow">
+        <div class="stat"><b>55%</b><small>Public sale + liquidity (depth + stability).</small></div>
+        <div class="stat"><b>20%</b><small>Staking + ecosystem rewards (long-term holders).</small></div>
+        <div class="stat"><b>15%</b><small>Marketing + growth (with controlled spend).</small></div>
+        <div class="stat"><b>10%</b><small>Airdrops + community giveaways (organic reach).</small></div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY -->
+    <section id="community" class="section reveal">
+      <div class="sectionHead">
+        <div>
+          <h2>Community</h2>
+          <p>Where DDY lives. Join the core channels and keep the vibe consistent.</p>
+        </div>
+        <span class="chip">Official Links</span>
+      </div>
+
+      <div class="grid">
+        <div class="media">
+          <div class="stripe"></div>
+          <div class="content">
+            <div class="big">DUDDY is culture.</div>
+            <p class="desc">If we do one thing right — it’s consistency. Same tone, same visuals, same message.</p>
+            <div class="heroActions" style="margin-top:14px">
+              <a class="a" href="https://x.com/official_duddy" target="_blank" rel="noreferrer">X / Twitter</a>
+              <a class="a" href="https://t.me/duddyofficial_ddy" target="_blank" rel="noreferrer">Telegram</a>
+              <a class="a" href="https://discord.gg/aKgK2RDep" target="_blank" rel="noreferrer">Discord</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="cards">
+          <div class="card">
+            <div class="top"><span class="tag">Contact</span><span class="tag">Business</span></div>
+            <h3>official@duddy.fun</h3>
+            <p>Partnerships, listings, collabs — direct line.</p>
+          </div>
+          <div class="card">
+            <div class="top"><span class="tag">Website</span><span class="tag">Official</span></div>
+            <h3>duddy.fun</h3>
+            <p>Main hub for the DDY ecosystem.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="reveal">
+      <div>© <span id="year"></span> DUDDY — $DDY</div>
+      <div>
+        <a href="https://duddy.fun" target="_blank" rel="noreferrer">duddy.fun</a>
+      </div>
+    </footer>
 
   </div>
 
   <script>
+    // year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Search filter
-    const search = document.getElementById("search");
-    const cards = Array.from(document.querySelectorAll("#cards .card"));
-    search.addEventListener("input", () => {
-      const q = (search.value || "").trim().toLowerCase();
-      cards.forEach(card => {
-        const text = card.innerText.toLowerCase();
-        card.style.display = text.includes(q) ? "" : "none";
-      });
-    });
+    // mobile menu
+    const btn = document.getElementById("menuBtn");
+    const drawer = document.getElementById("drawer");
+    btn?.addEventListener("click", () => drawer.classList.toggle("show"));
 
-    // Ctrl/⌘ + K focus
-    window.addEventListener("keydown", (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
-        e.preventDefault();
-        search.focus();
-      }
-    });
+    // smooth reveal observer
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add("show");
+      });
+    }, {threshold: 0.12});
+
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
   </script>
 </body>
 </html>
