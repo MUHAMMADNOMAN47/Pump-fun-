@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>DUDDY Docs</title>
+  <title>DUDDY — Docs</title>
 
-  <!-- Fonts (optional but recommended) -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
@@ -13,423 +13,323 @@
   <style>
     :root{
       /* DUDDY palette */
-      --g1:#2CCE6E;  /* green */
-      --g2:#1A988D;  /* teal */
-      --b1:#1A628F;  /* blue */
-      --p1:#9F52CB;  /* purple */
-      --p2:#6151A6;  /* violet */
-      --bg1:#070519; /* deep */
-      --bg2:#0B1030; /* deep */
-      --ink:#F6F1DC;
-      --muted:rgba(246,241,220,.68);
+      --g1:#2CCE6E;
+      --g2:#1A988D;
+      --b1:#1A628F;
+      --p1:#9F52CB;
+      --p2:#6151A6;
 
-      --glass:rgba(255,255,255,.06);
-      --glass2:rgba(255,255,255,.08);
-      --stroke:rgba(255,255,255,.10);
-      --shadow: 0 18px 55px rgba(0,0,0,.45);
-      --radius:22px;
+      --bg0:#070519;
+      --bg1:#0B1030;
+
+      --ink:#F6F1DC;
+      --muted: rgba(246,241,220,.68);
+
+      /* WALRUS-like crisp glass */
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.12);
+      --stroke2: rgba(255,255,255,.18);
+
+      /* less rounded, more “square box” */
+      --r1: 18px;
+      --r2: 22px;
 
       --grad: linear-gradient(90deg,var(--g1) 0%, var(--g2) 55%, var(--p1) 100%);
-      --bggrad: linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 55%, var(--bg1) 100%);
+      --bggrad: radial-gradient(1200px 700px at 20% 10%, rgba(97,81,166,.18), transparent 60%),
+                radial-gradient(900px 600px at 85% 15%, rgba(44,206,110,.16), transparent 55%),
+                linear-gradient(180deg,var(--bg0) 0%, var(--bg1) 55%, var(--bg0) 100%);
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--ink);
       background: var(--bggrad);
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       overflow-x:hidden;
     }
 
-    /* Subtle grain */
-    body::before{
+    /* subtle grid like walrus sections (very low) */
+    body:before{
       content:"";
       position:fixed; inset:0;
       pointer-events:none;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.10'/%3E%3C/svg%3E");
-      mix-blend-mode:overlay;
-      opacity:.25;
-    }
-
-    /* Background glow orbs */
-    .orb{
-      position:fixed;
-      width:520px; height:520px;
-      filter: blur(42px);
-      opacity:.18;
-      pointer-events:none;
-      transform: translate3d(0,0,0);
-      animation: floaty 10s ease-in-out infinite;
-    }
-    .orb.one{
-      left:-220px; top:-200px;
-      background: radial-gradient(circle at 30% 30%, var(--g1), transparent 60%);
-      animation-duration: 13s;
-    }
-    .orb.two{
-      right:-220px; top:10%;
-      background: radial-gradient(circle at 60% 30%, var(--p1), transparent 60%);
-      animation-duration: 16s;
-    }
-    .orb.three{
-      left:10%; bottom:-260px;
-      background: radial-gradient(circle at 40% 60%, var(--g2), transparent 60%);
-      animation-duration: 18s;
-    }
-    @keyframes floaty{
-      0%,100%{ transform: translate(0,0) }
-      50%{ transform: translate(22px,-18px) }
-    }
-
-    /* Particles canvas */
-    #particles{
-      position:fixed;
-      inset:0;
-      width:100%;
-      height:100%;
-      pointer-events:none;
-      opacity:.55;
+      background:
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size: 90px 90px;
+      opacity:.08;
+      mix-blend-mode: overlay;
     }
 
     .wrap{
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: 16px 14px 44px;
       position:relative;
-      max-width:1100px;
-      margin:0 auto;
-      padding: 18px 16px 54px;
     }
 
-    /* Top bar */
+    /* Top bar (clean, no extra text) */
     .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
       padding: 14px 14px;
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border:1px solid var(--stroke);
-      border-radius: 18px;
-      box-shadow: 0 10px 34px rgba(0,0,0,.30);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      border-radius: var(--r2);
+      border: 1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 16px 48px rgba(0,0,0,.42);
     }
-
     .brand{
       display:flex;
       align-items:center;
       gap:10px;
-      min-width: 0;
+      min-width:0;
     }
     .brand img{
       width:44px; height:44px;
       object-fit:contain;
       border-radius: 14px;
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.10);
       padding:6px;
     }
-    .brand .t{
-      display:flex;
-      flex-direction:column;
-      line-height:1.05;
-      min-width:0;
-    }
-    .brand .t strong{
-      font-family: "Space Grotesk", Inter, system-ui;
+    .brand .name{
+      font-family:"Space Grotesk", Inter, system-ui;
       font-size: 18px;
       letter-spacing:.3px;
+      line-height:1;
     }
-    .chips{
+    .subchips{
       display:flex;
       gap:8px;
-      align-items:center;
+      margin-top:6px;
       flex-wrap:wrap;
     }
     .chip{
       font-size:12px;
-      padding:7px 10px;
-      border-radius:999px;
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.08);
-      color: rgba(246,241,220,.82);
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.10);
+      color: rgba(246,241,220,.78);
+      white-space:nowrap;
     }
-    .chip.dot::before{
+    .chip.live::before{
       content:"";
-      display:inline-block;
-      width:7px; height:7px;
-      border-radius:999px;
-      margin-right:8px;
+      width:7px;height:7px;border-radius:99px;
+      display:inline-block;margin-right:8px;
       background: var(--g1);
-      box-shadow: 0 0 14px rgba(44,206,110,.55);
+      box-shadow: 0 0 12px rgba(44,206,110,.55);
       vertical-align:middle;
     }
 
-    .actions{
-      display:flex; gap:10px; align-items:center;
-    }
+    .actions{display:flex; gap:10px; align-items:center;}
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
+      display:inline-flex; align-items:center; justify-content:center;
       padding: 11px 14px;
       border-radius: 999px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
       color: var(--ink);
       text-decoration:none;
       font-weight:600;
-      font-size: 14px;
-      transition: transform .18s ease, background .18s ease, box-shadow .18s ease, border-color .18s ease;
+      font-size:14px;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
       white-space:nowrap;
     }
-    .btn:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,.08);
-      border-color: rgba(255,255,255,.16);
-    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18); }
     .btn.primary{
       background: var(--grad);
-      color:#061018;
-      border-color: rgba(255,255,255,.12);
-      box-shadow: 0 14px 35px rgba(44,206,110,.12), 0 14px 35px rgba(159,82,203,.10);
-      position:relative;
-      overflow:hidden;
-    }
-    .btn.primary::after{
-      content:"";
-      position:absolute; inset:-40px;
-      background: radial-gradient(circle at 20% 30%, rgba(255,255,255,.65), transparent 45%);
-      transform: translateX(-55%);
-      opacity:.25;
-      animation: sweep 2.6s ease-in-out infinite;
-    }
-    @keyframes sweep{
-      0%,100%{ transform: translateX(-55%) }
-      50%{ transform: translateX(35%) }
+      color: #071018;
+      border-color: rgba(255,255,255,.14);
+      box-shadow: 0 16px 40px rgba(44,206,110,.10), 0 16px 40px rgba(159,82,203,.10);
     }
 
-    /* Hero */
-    .hero{
-      margin-top: 16px;
-      padding: 22px 18px;
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.10);
+    /* Section header block (NO "DUDDY Docs" title) */
+    .panel{
+      margin-top: 14px;
+      padding: 16px 14px;
+      border-radius: var(--r2);
+      border: 1px solid var(--stroke);
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      box-shadow: var(--shadow);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      overflow:hidden;
-      position:relative;
+      box-shadow: 0 18px 52px rgba(0,0,0,.40);
     }
 
-    .hero::before{
-      content:"";
-      position:absolute;
-      inset:-120px;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(44,206,110,.22), transparent 55%),
-        radial-gradient(circle at 80% 30%, rgba(159,82,203,.18), transparent 55%),
-        radial-gradient(circle at 50% 90%, rgba(26,152,141,.18), transparent 55%);
-      filter: blur(12px);
-      opacity:.9;
-      pointer-events:none;
+    .panel .row{
+      display:flex; gap:12px; align-items:center; flex-wrap:wrap;
+      justify-content:space-between;
     }
 
-    .hero h1{
-      margin:0;
-      font-family:"Space Grotesk", Inter, system-ui;
-      font-size: 34px;
-      letter-spacing:.2px;
-      position:relative;
+    /* “Walrus-like” colored blocks (3 accents) */
+    .blocks{
+      display:flex; gap:10px; flex-wrap:wrap;
     }
-    .hero p{
-      margin: 10px 0 0;
-      color: var(--muted);
-      max-width: 56ch;
-      position:relative;
+    .block{
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      color: rgba(246,241,220,.82);
+      font-size: 13px;
+      font-weight:600;
     }
+    .block.a{ box-shadow: inset 0 0 0 1px rgba(44,206,110,.18); }
+    .block.b{ box-shadow: inset 0 0 0 1px rgba(26,152,141,.18); }
+    .block.c{ box-shadow: inset 0 0 0 1px rgba(159,82,203,.18); }
 
-    /* Search */
+    /* Search (clean) */
     .search{
-      margin-top: 16px;
+      margin-top: 12px;
       display:flex;
       gap:10px;
-      position:relative;
       flex-wrap:wrap;
     }
-    .search .box{
+    .searchbox{
       flex: 1 1 260px;
-      display:flex;
-      align-items:center;
-      gap:10px;
+      display:flex; align-items:center; gap:10px;
       padding: 12px 14px;
-      border-radius: 16px;
+      border-radius: var(--r1);
       border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.18);
-      color: rgba(246,241,220,.78);
-      position:relative;
+      background: rgba(0,0,0,.20);
+      color: rgba(246,241,220,.72);
     }
-    .search input{
+    .searchbox input{
       width:100%;
-      border:none;
-      outline:none;
+      border:none; outline:none;
       background:transparent;
       color: rgba(246,241,220,.90);
       font-size:14px;
     }
-    .search input::placeholder{ color: rgba(246,241,220,.45); }
     .kbd{
       font-size:12px;
       padding: 6px 10px;
-      border-radius: 10px;
+      border-radius: 12px;
       border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.05);
       color: rgba(246,241,220,.60);
       white-space:nowrap;
     }
 
-    /* Cards grid */
+    /* Cards (bigger, squarer, walrus-like) */
     .grid{
-      margin-top: 18px;
+      margin-top: 14px;
       display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 14px;
+      grid-template-columns: 1fr;
+      gap: 12px;
     }
 
     .card{
-      grid-column: span 12;
-      padding: 18px 16px;
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      box-shadow: 0 16px 46px rgba(0,0,0,.35);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      position:relative;
-      overflow:hidden;
       text-decoration:none;
       color: var(--ink);
-      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+      border-radius: var(--r2);
+      border: 1px solid var(--stroke);
+      background: rgba(0,0,0,.18);
+      box-shadow: 0 18px 50px rgba(0,0,0,.45);
+      overflow:hidden;
+      position:relative;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
     }
 
+    /* accent top strip like brand panels */
     .card::before{
       content:"";
       position:absolute;
-      inset:-80px;
-      background: radial-gradient(circle at 20% 20%, rgba(44,206,110,.18), transparent 55%);
-      opacity:.0;
-      transition: opacity .22s ease;
-      pointer-events:none;
+      left:0; top:0; right:0;
+      height: 4px;
+      background: var(--grad);
+      opacity:.85;
     }
 
     .card:hover{
-      transform: translateY(-3px);
-      border-color: rgba(255,255,255,.16);
-      box-shadow: 0 22px 65px rgba(0,0,0,.45);
+      transform: translateY(-2px);
+      border-color: var(--stroke2);
+      background: rgba(255,255,255,.06);
     }
-    .card:hover::before{ opacity:.85; }
 
-    .card .row{
+    .cardInner{
+      padding: 18px 16px 16px;
       display:flex;
       gap:12px;
       align-items:flex-start;
     }
 
     .icon{
-      width:48px; height:48px;
-      display:grid; place-items:center;
+      width:52px; height:52px;
       border-radius: 16px;
+      display:grid; place-items:center;
+      background: rgba(255,255,255,.06);
       border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.18);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
-      font-size:20px;
+      font-size: 22px;
+      flex:0 0 auto;
     }
 
-    .meta{
-      flex:1;
-      min-width:0;
-    }
+    .meta{ flex:1; min-width:0; }
     .meta h3{
       margin:0;
       font-family:"Space Grotesk", Inter, system-ui;
-      font-size:18px;
+      font-size: 18px;
       letter-spacing:.2px;
     }
     .meta p{
-      margin:6px 0 0;
+      margin: 7px 0 0;
       color: var(--muted);
-      font-size: 13.5px;
       line-height:1.45;
+      font-size: 13.5px;
     }
 
-    .arrow{
-      margin-left:auto;
-      width:42px; height:42px;
+    .go{
+      width:46px; height:46px;
       border-radius: 16px;
       display:grid; place-items:center;
+      background: rgba(255,255,255,.06);
       border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      transition: transform .18s ease, background .18s ease;
       flex:0 0 auto;
+      transition: transform .18s ease;
     }
-    .card:hover .arrow{
-      transform: translateX(2px);
-      background: rgba(255,255,255,.08);
-    }
+    .card:hover .go{ transform: translateX(2px); }
 
-    /* Two columns on wider screens */
-    @media (min-width: 860px){
-      .hero{ padding: 28px 24px; }
-      .hero h1{ font-size: 42px; }
-
-      .card{ grid-column: span 6; padding: 20px 18px; }
+    @media (min-width: 900px){
+      .grid{ grid-template-columns: 1fr 1fr; }
     }
 
-    /* Footer */
     .foot{
-      margin-top: 18px;
-      padding: 14px 4px 0;
+      margin-top: 14px;
       color: rgba(246,241,220,.55);
       font-size: 12px;
       display:flex;
       justify-content:space-between;
       gap:10px;
       flex-wrap:wrap;
+      padding: 8px 2px 0;
     }
     .foot a{
       color: rgba(246,241,220,.65);
       text-decoration:none;
       border-bottom: 1px dashed rgba(246,241,220,.25);
     }
-    .foot a:hover{ color: rgba(246,241,220,.90); }
-
-    /* Small helpers */
-    .mono{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      font-size: 12px;
-      color: rgba(246,241,220,.70);
-    }
+    .foot a:hover{ color: rgba(246,241,220,.92); }
   </style>
 </head>
 
 <body>
-  <canvas id="particles"></canvas>
-  <div class="orb one"></div>
-  <div class="orb two"></div>
-  <div class="orb three"></div>
-
   <div class="wrap">
-    <!-- TOPBAR -->
+
+    <!-- TOPBAR (logo only once) -->
     <div class="topbar">
       <div class="brand">
-        <!-- ✅ Keep logo SAME (just set correct path) -->
         <img src="assets/duddy_logo_transparent.png" alt="DUDDY logo" />
-        <div class="t">
-          <strong>DUDDY</strong>
-          <div class="chips">
-            <span class="chip dot">$DDY</span>
+        <div>
+          <div class="name">DUDDY</div>
+          <div class="subchips">
+            <span class="chip live">$DDY</span>
             <span class="chip">SOLANA</span>
           </div>
         </div>
@@ -437,170 +337,106 @@
 
       <div class="actions">
         <a class="btn" href="https://duddy.fun">Home</a>
-        <!-- ✅ Put your buy link here -->
         <a class="btn primary" href="https://duddy.fun" target="_blank" rel="noreferrer">⚡ Buy $DDY</a>
       </div>
     </div>
 
-    <!-- HERO -->
-    <section class="hero">
-      <h1>DUDDY Docs</h1>
-      <p>Everything DDY — one place. Clear documentation, clean links, and no unnecessary noise.</p>
+    <!-- CLEAN PANEL (no big heading) -->
+    <section class="panel">
+      <div class="row">
+        <div class="blocks">
+          <div class="block a">Official: duddy.fun</div>
+          <div class="block b">Docs Hub</div>
+          <div class="block c">Community First</div>
+        </div>
+      </div>
 
       <div class="search">
-        <div class="box" title="This is a visual search bar (optional). You can wire it later.">
+        <div class="searchbox">
           🔎
-          <input id="search" type="text" placeholder="Search docs (e.g., tokenomics, staking, brand kit)" />
+          <input id="search" type="text" placeholder="Search (whitepaper, tokenomics, staking...)" />
           <span class="kbd">Ctrl / ⌘ K</span>
         </div>
-        <span class="chip">Official: duddy.fun</span>
       </div>
     </section>
 
-    <!-- CARDS -->
+    <!-- DOCS CARDS -->
     <div class="grid" id="cards">
-      <!-- ✅ Update href to your real pages/files -->
+
       <a class="card" href="whitepaper.html">
-        <div class="row">
+        <div class="cardInner">
           <div class="icon">📄</div>
           <div class="meta">
             <h3>Whitepaper</h3>
-            <p>What DDY is, why it exists, and how the project is built to grow without fake promises.</p>
+            <p>Project overview, goals, transparency rules, and what DDY is building long-term.</p>
           </div>
-          <div class="arrow">↗</div>
+          <div class="go">↗</div>
         </div>
       </a>
 
       <a class="card" href="roadmap-tokenomics.html">
-        <div class="row">
+        <div class="cardInner">
           <div class="icon">🧭</div>
           <div class="meta">
             <h3>Roadmap + Tokenomics</h3>
-            <p>Phased goals + supply distribution — explained in a simple, investor-friendly way.</p>
+            <p>Phases + supply allocation explained clearly — simple, clean, and investor friendly.</p>
           </div>
-          <div class="arrow">↗</div>
+          <div class="go">↗</div>
         </div>
       </a>
 
       <a class="card" href="staking.html">
-        <div class="row">
+        <div class="cardInner">
           <div class="icon">💎</div>
           <div class="meta">
             <h3>Staking</h3>
-            <p>How rewards work, what’s locked, and what changes as the ecosystem expands.</p>
+            <p>Rewards, lock logic, and how the staking system grows with the ecosystem.</p>
           </div>
-          <div class="arrow">↗</div>
+          <div class="go">↗</div>
         </div>
       </a>
 
       <a class="card" href="brand-kit.html">
-        <div class="row">
+        <div class="cardInner">
           <div class="icon">🎨</div>
           <div class="meta">
             <h3>Brand Kit</h3>
-            <p>Official logo, colors, and assets — so the community stays consistent everywhere.</p>
+            <p>Official assets, colors, and guidelines for community posts & creatives.</p>
           </div>
-          <div class="arrow">↗</div>
+          <div class="go">↗</div>
         </div>
       </a>
+
     </div>
 
     <div class="foot">
-      <div>© <span id="year"></span> DUDDY — <span class="mono">Docs hub</span></div>
+      <div>© <span id="year"></span> DUDDY</div>
       <div>
-        <a href="https://x.com/official_duddy" target="_blank" rel="noreferrer">X/Twitter</a> ·
+        <a href="https://x.com/official_duddy" target="_blank" rel="noreferrer">X</a> ·
         <a href="https://t.me/duddyofficial_ddy" target="_blank" rel="noreferrer">Telegram</a> ·
         <a href="https://discord.gg/aKgK2RDep" target="_blank" rel="noreferrer">Discord</a>
       </div>
     </div>
+
   </div>
 
   <script>
-    // Year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Subtle particles (no heavy animation)
-    const canvas = document.getElementById("particles");
-    const ctx = canvas.getContext("2d");
-    let w, h, dpr;
-
-    function resize(){
-      dpr = Math.max(1, window.devicePixelRatio || 1);
-      w = canvas.width = Math.floor(window.innerWidth * dpr);
-      h = canvas.height = Math.floor(window.innerHeight * dpr);
-      canvas.style.width = window.innerWidth + "px";
-      canvas.style.height = window.innerHeight + "px";
-    }
-    window.addEventListener("resize", resize);
-    resize();
-
-    const dots = Array.from({length: 70}, () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      r: (Math.random() * 1.7 + 0.6) * dpr,
-      vx: (Math.random() - 0.5) * 0.25 * dpr,
-      vy: (Math.random() - 0.5) * 0.25 * dpr,
-      a: Math.random() * 0.35 + 0.08
-    }));
-
-    function tick(){
-      ctx.clearRect(0,0,w,h);
-
-      // dots
-      for(const p of dots){
-        p.x += p.vx;
-        p.y += p.vy;
-
-        if(p.x < -10) p.x = w + 10;
-        if(p.x > w + 10) p.x = -10;
-        if(p.y < -10) p.y = h + 10;
-        if(p.y > h + 10) p.y = -10;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-        ctx.fillStyle = `rgba(246,241,220,${p.a})`;
-        ctx.fill();
-      }
-
-      // soft connecting lines (few)
-      for(let i=0;i<dots.length;i++){
-        for(let j=i+1;j<dots.length;j++){
-          const a = dots[i], b = dots[j];
-          const dx = a.x - b.x, dy = a.y - b.y;
-          const dist = Math.sqrt(dx*dx + dy*dy);
-          const max = 160 * dpr;
-          if(dist < max){
-            const alpha = (1 - dist/max) * 0.10;
-            ctx.strokeStyle = `rgba(44,206,110,${alpha})`;
-            ctx.lineWidth = 1 * dpr;
-            ctx.beginPath();
-            ctx.moveTo(a.x,a.y);
-            ctx.lineTo(b.x,b.y);
-            ctx.stroke();
-          }
-        }
-      }
-
-      requestAnimationFrame(tick);
-    }
-    tick();
-
-    // Fake search filter (client-side)
+    // Search filter
     const search = document.getElementById("search");
     const cards = Array.from(document.querySelectorAll("#cards .card"));
-
-    function filter(){
+    search.addEventListener("input", () => {
       const q = (search.value || "").trim().toLowerCase();
       cards.forEach(card => {
         const text = card.innerText.toLowerCase();
         card.style.display = text.includes(q) ? "" : "none";
       });
-    }
-    search.addEventListener("input", filter);
+    });
 
     // Ctrl/⌘ + K focus
     window.addEventListener("keydown", (e) => {
-      if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k"){
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         search.focus();
       }
