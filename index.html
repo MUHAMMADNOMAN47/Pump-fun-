@@ -3,788 +3,507 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DUDDY - Solana Meme Coin</title>
+    <title>DUDDY - The Official Meme Coin</title>
+    <link rel="icon" type="image/x-icon" href="duddy-logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-green: #00ff88;
-            --primary-green-light: #4dffaa;
-            --primary-green-dark: #00cc6a;
-            --accent-purple: #9d4edd;
-            --accent-purple-light: #b87eff;
-            --accent-purple-dark: #7b2cbf;
-            --dark-bg: #05110b;
-            --dark-bg-gradient: linear-gradient(135deg, #05110b 0%, #0a1a12 50%, #05110b 100%);
-            --card-bg: rgba(10, 26, 18, 0.85);
-            --text-primary: #ffffff;
-            --text-secondary: #c8f5de;
-            --text-muted: #88c9aa;
-            --sparkle-color: rgba(255, 255, 255, 0.7);
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #00ff88;
+            --secondary: #00cc6a;
+            --accent: #00ffaa;
+            --dark: #000000;
+            --darker: #0a0a0a;
+            --gray: #111111;
+            --light-gray: #222222;
+            --light: #ffffff;
+            --glass: rgba(0, 255, 136, 0.05);
+            --glass-border: rgba(0, 255, 136, 0.1);
+        }
+
         body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--dark-bg-gradient);
-            color: var(--text-primary);
+            background-color: var(--dark);
+            color: var(--light);
             overflow-x: hidden;
-            min-height: 100vh;
-            position: relative;
+            font-family: 'Exo 2', sans-serif;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 136, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 136, 0.03) 0%, transparent 20%);
+            background-attachment: fixed;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="%2300ff88" opacity="0.7"/></svg>') 16 16, auto;
         }
 
-        /* Sparkle/Star Particles Background */
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(5, 17, 11, 0.92);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(0, 255, 136, 0.15);
-            padding: 18px 0;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo-box {
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.25);
-            animation: gentlePulse 4s ease-in-out infinite;
-            overflow: hidden;
-        }
-
-        @keyframes gentlePulse {
-            0%, 100% { transform: translateY(0px) scale(1); box-shadow: 0 8px 25px rgba(0, 255, 136, 0.25); }
-            50% { transform: translateY(-4px) scale(1.02); box-shadow: 0 12px 35px rgba(0, 255, 136, 0.4); }
-        }
-
-        .logo-box .logo-letter {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 32px;
-            color: var(--dark-bg);
-        }
-
-        .logo-text {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 28px;
-            background: linear-gradient(90deg, var(--primary-green) 0%, var(--primary-green) 55%, var(--accent-purple) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: 0.5px;
-            animation: colorShift 8s infinite alternate;
-        }
-
-        @keyframes colorShift {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-
-        .nav-buttons {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .nav-icon-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 14px;
-            background: rgba(0, 255, 136, 0.08);
-            border: 1.5px solid rgba(0, 255, 136, 0.2);
-            color: var(--primary-green);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-size: 22px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .nav-icon-btn.x-btn {
-            color: var(--text-primary);
-            background: rgba(29, 29, 29, 0.9);
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-
-        .nav-icon-btn:hover {
-            transform: translateY(-5px) scale(1.08);
-            background: rgba(0, 255, 136, 0.2);
-            border-color: var(--primary-green);
-            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
-        }
-
-        .nav-icon-btn.x-btn:hover {
-            background: rgba(0, 0, 0, 0.9);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        }
-
-        .buy-btn {
-            padding: 13px 28px;
-            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
-            border: none;
-            border-radius: 14px;
-            color: var(--dark-bg);
+        h1, h2, h3, h4, .logo-text {
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            letter-spacing: 0.5px;
-            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.3);
-        }
-
-        .buy-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.5);
-            background: linear-gradient(135deg, var(--primary-green-light), var(--primary-green));
-        }
-
-        /* Main Content */
-        main {
-            padding-top: 130px;
-        }
-
-        .section {
-            padding: 90px 0;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background-color: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.15);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 900;
+            font-size: 1.8rem;
+            animation: logoFloat 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(1deg); }
+            75% { transform: translateY(5px) rotate(-1deg); }
+        }
+
+        .logo-img {
+            height: 50px;
+            filter: drop-shadow(0 0 15px var(--primary));
+            transition: transform 0.5s ease;
+        }
+
+        .logo:hover .logo-img {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .logo-text {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.7);
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            color: #aaa;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+            font-size: 1.1rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(0, 255, 136, 0.1);
+            transform: rotate(90deg);
         }
 
         /* Hero Section */
         .hero {
+            padding: 200px 0 80px;
             text-align: center;
-            padding: 40px 0 100px;
-        }
-
-        .hero-logo-container {
-            width: 220px;
-            height: 220px;
-            margin: 0 auto 50px;
-            position: relative;
-        }
-
-        .hero-logo-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 280px;
-            height: 280px;
-            background: radial-gradient(ellipse at center, rgba(0, 255, 136, 0.25) 0%, transparent 70%);
-            filter: blur(45px);
-            border-radius: 50%;
-            z-index: -1;
-            animation: glowPulse 5s ease-in-out infinite;
-        }
-
-        @keyframes glowPulse {
-            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.05); }
-        }
-
-        .hero-logo-box {
-            width: 100%;
-            height: 100%;
-            background: var(--card-bg);
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid rgba(0, 255, 136, 0.3);
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
         }
 
-        .hero-logo-box::before {
+        .hero::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--primary-green), var(--accent-purple), transparent);
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 255, 136, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(0, 255, 136, 0.15) 0%, transparent 50%);
+            z-index: -1;
+            animation: pulseBackground 4s ease-in-out infinite alternate;
         }
 
-        .hero-logo-letter {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 100px;
-            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+        @keyframes pulseBackground {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+
+        .hero-logo-container {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .hero-logo {
+            height: 220px;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 0 40px var(--primary));
+            animation: logoFloat 4s ease-in-out infinite, pulseGlow 2s infinite alternate;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+
+        .hero-logo:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        @keyframes pulseGlow {
+            0% { 
+                filter: drop-shadow(0 0 25px var(--primary)) 
+                       drop-shadow(0 0 50px rgba(0, 255, 136, 0.3)); 
+            }
+            100% { 
+                filter: drop-shadow(0 0 40px var(--primary)) 
+                       drop-shadow(0 0 80px rgba(0, 255, 136, 0.5)); 
+            }
+        }
+
+        .logo-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 250px;
+            height: 250px;
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: rotateRing 20s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes rotateRing {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: floatLogo 6s ease-in-out infinite;
-        }
-
-        @keyframes floatLogo {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-12px) rotate(1deg); }
-            75% { transform: translateY(8px) rotate(-1deg); }
-        }
-
-        .hero-title {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 5.2rem;
-            margin-bottom: 20px;
-            line-height: 1;
-            letter-spacing: 1px;
-        }
-
-        .hero-title .word-du {
-            color: var(--primary-green);
+            animation: gradientShift 5s infinite alternate, textGlow 2s infinite alternate;
             text-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
-            animation: textGlowGreen 3s ease-in-out infinite alternate;
+            line-height: 1.2;
         }
 
-        @keyframes textGlowGreen {
-            0% { text-shadow: 0 0 20px rgba(0, 255, 136, 0.5), 0 0 40px rgba(0, 255, 136, 0.2); }
-            100% { text-shadow: 0 0 30px rgba(0, 255, 136, 0.7), 0 0 60px rgba(0, 255, 136, 0.3); }
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 20px rgba(0, 255, 136, 0.5); }
+            100% { text-shadow: 0 0 40px rgba(0, 255, 136, 0.8); }
         }
 
-        .hero-title .word-ddy {
-            color: var(--accent-purple);
-            text-shadow: 0 0 30px rgba(157, 78, 221, 0.5);
-            animation: textGlowPurple 3s ease-in-out infinite alternate;
-            animation-delay: 0.5s;
-        }
-
-        @keyframes textGlowPurple {
-            0% { text-shadow: 0 0 20px rgba(157, 78, 221, 0.5), 0 0 40px rgba(157, 78, 221, 0.2); }
-            100% { text-shadow: 0 0 30px rgba(157, 78, 221, 0.7), 0 0 60px rgba(157, 78, 221, 0.3); }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
 
         .hero-subtitle {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.9rem;
-            color: var(--text-secondary);
-            margin-bottom: 25px;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--primary);
             font-weight: 600;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            letter-spacing: 0.5px;
-        }
-
-        .hero-description {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 680px;
-            margin: 0 auto 60px;
-            line-height: 1.7;
-        }
-
-        /* Contract Address */
-        .contract-section {
-            max-width: 720px;
-            margin: 0 auto 60px;
-        }
-
-        .contract-box {
-            background: var(--card-bg);
-            border: 1.5px solid rgba(0, 255, 136, 0.25);
-            border-radius: 20px;
-            padding: 28px;
-            backdrop-filter: blur(15px);
-            box-shadow: 
-                0 15px 45px rgba(0, 0, 0, 0.35),
-                inset 0 1px 0 rgba(255, 255, 255, 0.08);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contract-box:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary-green);
-            box-shadow: 
-                0 25px 60px rgba(0, 0, 0, 0.45),
-                0 0 0 1px rgba(0, 255, 136, 0.15);
-        }
-
-        .contract-label {
-            color: var(--primary-green);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            display: block;
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
             letter-spacing: 1px;
         }
 
-        .address-wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
+        .hero-description {
+            font-size: 1.3rem;
+            max-width: 850px;
+            margin: 0 auto 40px;
+            color: #ccc;
+            line-height: 1.7;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
-        .address-text {
-            font-family: 'Courier New', 'SF Mono', monospace;
-            font-size: 1.05rem;
-            color: var(--text-secondary);
-            word-break: break-all;
-            flex: 1;
-            letter-spacing: 0.5px;
-        }
-
-        .copy-btn {
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.15), rgba(157, 78, 221, 0.15));
-            border: 1.5px solid rgba(0, 255, 136, 0.3);
-            border-radius: 12px;
-            color: var(--primary-green);
-            padding: 12px 26px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            letter-spacing: 0.5px;
-        }
-
-        .copy-btn:hover {
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.25), rgba(157, 78, 221, 0.25));
-            border-color: var(--primary-green);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 255, 136, 0.2);
-        }
-
-        .copy-btn.copied {
-            background: var(--accent-purple);
-            border-color: var(--accent-purple);
-            color: white;
-        }
-
-        /* Action Buttons */
-        .action-buttons {
-            display: flex;
-            gap: 25px;
-            justify-content: center;
-            margin-bottom: 100px;
-            flex-wrap: wrap;
-        }
-
-        .action-btn {
-            padding: 20px 42px;
-            border-radius: 18px;
-            font-family: 'Orbitron', sans-serif;
+        .hero-tagline {
             font-size: 1.2rem;
-            font-weight: 700;
+            color: #aaa;
+            font-style: italic;
+            margin-bottom: 50px;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            padding: 18px 35px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             align-items: center;
             gap: 15px;
             text-decoration: none;
-            min-width: 240px;
-            justify-content: center;
-            letter-spacing: 0.8px;
-        }
-
-        .action-btn.primary {
-            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
-            color: var(--dark-bg);
             border: none;
-            box-shadow: 0 15px 35px rgba(0, 255, 136, 0.35);
-        }
-
-        .action-btn.secondary {
-            background: transparent;
-            color: var(--primary-green);
-            border: 2.5px solid var(--primary-green);
-            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.15);
-        }
-
-        .action-btn:hover {
-            transform: translateY(-8px);
-        }
-
-        .action-btn.primary:hover {
-            box-shadow: 0 25px 50px rgba(0, 255, 136, 0.5);
-            background: linear-gradient(135deg, var(--primary-green-light), var(--primary-green));
-        }
-
-        .action-btn.secondary:hover {
-            background: rgba(0, 255, 136, 0.1);
-            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.25);
-        }
-
-        /* Section Headings */
-        .section-heading {
-            text-align: center;
-            margin-bottom: 70px;
             font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
 
-        .section-heading::after {
+        .btn::before {
             content: '';
             position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 180px;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-green), var(--accent-purple));
-            border-radius: 5px;
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+            z-index: -1;
         }
 
-        .section-heading.purple {
-            font-size: 3.8rem;
-            color: var(--accent-purple);
-            text-shadow: 0 0 30px rgba(157, 78, 221, 0.4);
+        .btn:hover::before {
+            left: 100%;
         }
 
-        .section-heading.green {
-            font-size: 3.8rem;
-            color: var(--primary-green);
-            text-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
+        .btn-primary {
+            background: linear-gradient(90deg, var(--dark), var(--primary));
+            color: var(--dark);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.4), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            border: 2px solid var(--primary);
         }
 
-        .section-heading.big {
-            font-size: 4.2rem;
+        .btn-primary:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.6), 
+                        0 0 60px rgba(0, 255, 136, 0.3),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            background: linear-gradient(90deg, var(--primary), var(--accent));
         }
 
-        /* About Section */
-        .about-card {
-            background: var(--card-bg);
-            border: 1.5px solid rgba(157, 78, 221, 0.25);
-            border-radius: 24px;
-            padding: 55px;
-            backdrop-filter: blur(15px);
-            box-shadow: 
-                0 20px 50px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.08);
-            max-width: 880px;
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            box-shadow: 0 10px 20px rgba(0, 255, 136, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 255, 136, 0.15);
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 255, 136, 0.3),
+                        0 0 50px rgba(0, 255, 136, 0.2);
+        }
+
+        .contract-address {
+            background: rgba(17, 17, 17, 0.8);
+            border: 1px solid var(--primary);
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 800px;
             margin: 0 auto;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.4s ease;
-        }
-
-        .about-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .about-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent-purple), transparent);
-        }
-
-        .about-text {
-            font-size: 1.3rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-
-        /* Duddynomics Section */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            border: 1.5px solid rgba(0, 255, 136, 0.2);
-            border-radius: 24px;
-            padding: 40px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             backdrop-filter: blur(15px);
-            text-align: center;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5),
+                        inset 0 0 20px rgba(0, 255, 136, 0.1);
+            transition: all 0.3s ease;
         }
 
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--primary-green), transparent);
+        .contract-address:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6),
+                        inset 0 0 30px rgba(0, 255, 136, 0.15);
         }
 
-        .stat-card:hover {
-            transform: translateY(-15px) scale(1.03);
-            border-color: var(--primary-green);
-            box-shadow: 
-                0 25px 60px rgba(0, 0, 0, 0.4),
-                0 0 0 1px rgba(0, 255, 136, 0.2);
+        .address-text {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            word-break: break-all;
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
         }
 
-        .stat-icon {
-            width: 85px;
-            height: 85px;
-            background: rgba(0, 255, 136, 0.12);
-            border-radius: 50%;
+        .copy-btn {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            color: var(--dark);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin: 0 auto 25px;
-            font-size: 36px;
-            color: var(--primary-green);
-            position: relative;
-            border: 2px solid rgba(0, 255, 136, 0.3);
-        }
-
-        .stat-icon::after {
-            content: '';
-            position: absolute;
-            top: -6px;
-            left: -6px;
-            right: -6px;
-            bottom: -6px;
-            border-radius: 50%;
-            border: 2px solid rgba(0, 255, 136, 0.15);
-            animation: rotateRing 8s linear infinite;
-        }
-
-        @keyframes rotateRing {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .stat-value {
+            gap: 10px;
+            font-weight: bold;
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 900;
-            color: var(--text-primary);
-            margin-bottom: 10px;
             letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
         }
 
-        .stat-label {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.35rem;
-            color: var(--primary-green);
-            font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: 0.5px;
+        .copy-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 255, 136, 0.5);
+            background: linear-gradient(90deg, var(--accent), var(--primary));
         }
 
-        .stat-subtext {
-            font-size: 1rem;
-            color: var(--text-muted);
-            letter-spacing: 0.3px;
+        .copied {
+            background: var(--accent) !important;
+            animation: pop 0.3s ease;
         }
 
-        /* Roadmap Section */
-        .roadmap-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-            gap: 32px;
-            margin-top: 40px;
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
-        .roadmap-card {
-            background: var(--card-bg);
-            border: 1.5px solid rgba(157, 78, 221, 0.2);
-            border-radius: 24px;
-            padding: 40px 35px;
-            backdrop-filter: blur(15px);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .roadmap-card::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 6px;
-            background: linear-gradient(to bottom, var(--primary-green), var(--accent-purple));
-            box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
-        }
-
-        .roadmap-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            border-color: var(--accent-purple);
-            box-shadow: 
-                0 30px 70px rgba(0, 0, 0, 0.4),
-                0 0 0 1px rgba(157, 78, 221, 0.2);
-        }
-
-        .phase-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
-            color: var(--dark-bg);
-            padding: 10px 24px;
-            border-radius: 30px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 700;
-            margin-bottom: 25px;
-            letter-spacing: 0.8px;
-            box-shadow: 0 8px 20px rgba(0, 255, 136, 0.3);
-        }
-
-        .phase-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.9rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 25px;
-            letter-spacing: 0.5px;
-        }
-
-        .phase-items {
-            list-style: none;
-        }
-
-        .phase-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            margin-bottom: 16px;
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            line-height: 1.5;
-        }
-
-        .phase-item i {
-            color: var(--accent-purple);
-            font-size: 14px;
-            margin-top: 7px;
-            animation: boltBlink 2s infinite;
-        }
-
-        @keyframes boltBlink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* Chart Section */
+        /* Live Chart Section */
         .chart-section {
-            background: linear-gradient(to bottom, rgba(5, 17, 11, 0.7), rgba(10, 26, 18, 0.9));
-            border-radius: 30px;
-            margin: 60px 24px;
+            padding: 80px 0;
+            background: rgba(10, 10, 10, 0.8);
+        }
+
+        .chart-container {
+            background: rgba(17, 17, 17, 0.8);
+            border: 1px solid var(--primary);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5),
+                        inset 0 0 30px rgba(0, 255, 136, 0.1);
             overflow: hidden;
-            border: 1.5px solid rgba(0, 255, 136, 0.2);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .chart-container:hover {
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6),
+                        inset 0 0 40px rgba(0, 255, 136, 0.15);
+            transform: translateY(-5px);
         }
 
         .chart-header {
-            padding: 30px 40px;
-            border-bottom: 1px solid rgba(0, 255, 136, 0.15);
-            background: rgba(5, 17, 11, 0.8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--glass-border);
         }
 
         .chart-header h2 {
-            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
             font-size: 2.2rem;
-            color: var(--primary-green);
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
             display: flex;
             align-items: center;
             gap: 15px;
+        }
+
+        .chart-update {
+            color: #aaa;
+            font-size: 0.9rem;
+            background: rgba(0, 255, 136, 0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--primary);
         }
 
         .live-indicator {
             display: flex;
             align-items: center;
             gap: 10px;
-            color: var(--primary-green);
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 600;
-            font-size: 0.9rem;
-            background: rgba(0, 255, 136, 0.1);
-            padding: 8px 18px;
-            border-radius: 30px;
-            border: 1px solid rgba(0, 255, 136, 0.3);
-            margin-top: 15px;
-            display: inline-flex;
+            color: var(--primary);
+            font-weight: bold;
+            animation: pulse 1.5s infinite;
         }
 
         .live-dot {
-            width: 10px;
-            height: 10px;
-            background: var(--primary-green);
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
             border-radius: 50%;
-            animation: livePulse 1.5s infinite;
+            animation: pulse 1.5s infinite;
         }
 
-        @keyframes livePulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
         }
 
-        #dexscreener-embed {
+        /* BirdEye Chart Container */
+        #birdeye-embed {
             position: relative;
             width: 100%;
-            height: 550px;
+            height: 650px;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid var(--light-gray);
+            background: #000;
         }
 
-        #dexscreener-embed iframe {
+        #birdeye-embed iframe {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -793,641 +512,1434 @@
             border: 0;
         }
 
-        /* Community Section */
-        .community-buttons {
-            max-width: 420px;
-            margin: 60px auto 0;
+        .chart-controls {
             display: flex;
-            flex-direction: column;
-            gap: 18px;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--glass-border);
         }
 
-        .community-btn {
-            padding: 22px 32px;
-            border-radius: 18px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 700;
+        .timeframes {
+            display: flex;
+            gap: 10px;
+        }
+
+        .timeframe-btn {
+            padding: 8px 15px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--glass-border);
+            color: #aaa;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .timeframe-btn:hover,
+        .timeframe-btn.active {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .fullscreen-btn {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            color: var(--dark);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .fullscreen-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3.2rem;
+            margin-bottom: 60px;
+            position: relative;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 5px;
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        /* About Section */
+        .about-content {
+            background: rgba(17, 17, 17, 0.7);
+            border: 1px solid var(--light-gray);
+            border-radius: 25px;
+            padding: 50px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3),
+                        inset 0 0 30px rgba(0, 255, 136, 0.05);
+            transition: all 0.4s ease;
+        }
+
+        .about-content:hover {
+            border-color: var(--primary);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4),
+                        inset 0 0 40px rgba(0, 255, 136, 0.1);
+            transform: translateY(-10px);
+        }
+
+        .about-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            text-align: center;
+            color: #ddd;
+            margin-bottom: 40px;
+        }
+
+        .highlight {
+            color: var(--primary);
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+
+        .about-tags {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .tag {
+            background: rgba(0, 255, 136, 0.15);
+            color: var(--primary);
+            padding: 15px 30px;
+            border-radius: 40px;
+            border: 2px solid var(--primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tag:hover {
+            background: rgba(0, 255, 136, 0.25);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 255, 136, 0.2);
+        }
+
+        /* Tokenomics Section */
+        .tokenomics-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .token-card {
+            background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+            border: 1px solid var(--light-gray);
+            border-radius: 25px;
+            padding: 40px 30px;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .token-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .token-card:hover::before {
+            left: 100%;
+        }
+
+        .token-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .token-card:hover {
+            transform: translateY(-20px) scale(1.03);
+            border-color: var(--primary);
+            box-shadow: 0 25px 50px rgba(0, 255, 136, 0.2),
+                        0 0 100px rgba(0, 255, 136, 0.1);
+        }
+
+        .token-icon {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            color: var(--primary);
+            text-shadow: 0 0 20px var(--primary);
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .token-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+        }
+
+        .token-value {
+            font-size: 2.2rem;
+            color: var(--light);
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+
+        .token-desc {
+            color: #bbb;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Roadmap Section */
+        .roadmap-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .roadmap-line {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        .roadmap-item {
+            position: relative;
+            width: 45%;
+            margin-bottom: 70px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .roadmap-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .roadmap-item:nth-child(odd) {
+            margin-left: 55%;
+        }
+
+        .roadmap-item:nth-child(even) {
+            margin-right: 55%;
+        }
+
+        .roadmap-marker {
+            position: absolute;
+            top: 0;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: linear-gradient(90deg, var(--dark), var(--primary));
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            font-size: 0.9rem;
+            z-index: 2;
+            border: 4px solid var(--dark);
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        .roadmap-item:nth-child(odd) .roadmap-marker {
+            left: -60px;
+        }
+
+        .roadmap-item:nth-child(even) .roadmap-marker {
+            right: -60px;
+        }
+
+        .roadmap-content {
+            background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+            border: 1px solid var(--light-gray);
+            border-radius: 20px;
+            padding: 35px;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .roadmap-content:hover {
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.15),
+                        0 0 60px rgba(0, 255, 136, 0.1);
+            transform: translateY(-10px);
+        }
+
+        .roadmap-phase {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--dark), var(--primary));
+            color: var(--dark);
+            padding: 10px 25px;
+            border-radius: 40px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .roadmap-check {
+            color: var(--primary);
+            margin-left: 12px;
+            text-shadow: 0 0 10px var(--primary);
+            animation: pulse 1.5s infinite;
+        }
+
+        .roadmap-content p {
+            color: #ccc;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* Features Section */
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+            border: 1px solid var(--light-gray);
+            border-radius: 25px;
+            padding: 40px 30px;
+            backdrop-filter: blur(20px);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .feature-card:hover {
+            transform: translateY(-20px) scale(1.03);
+            border-color: var(--primary);
+            box-shadow: 0 25px 50px rgba(0, 255, 136, 0.2),
+                        0 0 100px rgba(0, 255, 136, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            color: var(--primary);
+            text-shadow: 0 0 20px var(--primary);
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+        }
+
+        .feature-card p {
+            color: #bbb;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* Documents Section */
+        .documents-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+        }
+
+        .doc-card {
+            background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+            border: 1px solid var(--light-gray);
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .doc-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.2);
+        }
+
+        .doc-icon {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .doc-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .doc-btn {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            color: var(--dark);
+            padding: 12px 25px;
+            border-radius: 10px;
             text-decoration: none;
-            border: none;
-            letter-spacing: 0.8px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s ease;
         }
 
-        .community-btn:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+        .doc-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 255, 136, 0.3);
         }
 
-        .btn-telegram {
-            background: #0088cc;
-            color: white;
-            box-shadow: 0 15px 35px rgba(0, 136, 204, 0.3);
+        /* Social Links Section */
+        .social-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
         }
 
-        .btn-telegram:hover {
-            box-shadow: 0 25px 50px rgba(0, 136, 204, 0.5);
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 25px;
+            background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+            border: 1px solid var(--light-gray);
+            border-radius: 20px;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
         }
 
-        .btn-x {
-            background: #000000;
-            color: white;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height = 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+            transition: left 0.7s ease;
         }
 
-        .btn-x:hover {
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        .social-link:hover::before {
+            left = 100%;
         }
 
-        .btn-webapp {
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-purple-dark));
-            color: white;
-            box-shadow: 0 15px 35px rgba(157, 78, 221, 0.3);
+        .social-link:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.15);
         }
 
-        .btn-webapp:hover {
-            box-shadow: 0 25px 50px rgba(157, 78, 221, 0.5);
+        .social-icon {
+            font-size: 2.3rem;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover .social-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .social-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ddd;
+        }
+
+        .social-link:hover .social-text {
+            color: var(--primary);
         }
 
         /* Footer */
         footer {
-            padding: 80px 0 50px;
-            text-align: center;
-            border-top: 1.5px solid rgba(0, 255, 136, 0.15);
-            background: linear-gradient(to top, rgba(5, 17, 11, 0.95), transparent);
-            margin-top: 80px;
+            background: linear-gradient(to bottom, #0a0a0a, #000000);
+            padding: 70px 0 35px;
+            border-top: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
         }
 
         .footer-logo {
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 30px;
+            flex: 1;
+            min-width: 280px;
         }
 
-        .footer-logo-box {
+        .footer-logo .logo {
+            margin-bottom: 25px;
+        }
+
+        .footer-links {
+            flex: 2;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 25px;
+            min-width: 280px;
+        }
+
+        .footer-column h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+
+        .footer-column a {
+            color: #aaa;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary);
+            transform: translateX(10px);
+        }
+
+        .copyright {
+            text-align: center;
+            color: #666;
+            font-size: 0.95rem;
+            margin-top: 40px;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Matrix effect background */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: var(--card-bg);
-            border-radius: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid rgba(0, 255, 136, 0.25);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            z-index: -2;
+            opacity: 0.03;
+            pointer-events: none;
         }
 
-        .footer-logo-letter {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 42px;
-            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .footer-text {
-            color: var(--text-muted);
-            font-size: 1rem;
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-        }
-
-        .footer-social {
-            display: flex;
-            justify-content: center;
-            gap: 22px;
-            margin-bottom: 40px;
-        }
-
-        .footer-social .nav-icon-btn {
-            width: 56px;
-            height: 56px;
-            font-size: 24px;
+        /* Particle effect */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height = 100%;
+            z-index: -1;
+            pointer-events: none;
         }
 
         /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero-title {
-                font-size: 4.2rem;
-            }
-            .section-heading {
+        @media (max-width: 1200px) {
+            .hero h1 {
                 font-size: 3.2rem;
             }
-            .section-heading.big {
-                font-size: 3.5rem;
+            
+            .section-title {
+                font-size: 2.8rem;
             }
-            .hero-logo-container {
-                width: 190px;
-                height: 190px;
+            
+            .hero-logo {
+                height: 180px;
             }
-            .hero-logo-letter {
-                font-size: 85px;
+            
+            .logo-ring {
+                width: 220px;
+                height: 220px;
             }
-            #dexscreener-embed {
-                height: 480px;
+            
+            #birdeye-embed {
+                height: 550px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .roadmap-item {
+                width: 90%;
+                margin-left: 10% !important;
+                margin-right: 0 !important;
+            }
+            
+            .roadmap-item:nth-child(odd) .roadmap-marker,
+            .roadmap-item:nth-child(even) .roadmap-marker {
+                left: -40px;
+                right: auto;
+            }
+            
+            .roadmap-line {
+                left: 25px;
+            }
+            
+            #birdeye-embed {
+                height: 500px;
             }
         }
 
         @media (max-width: 768px) {
-            .nav-container {
-                padding: 0 18px;
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                padding: 100px 30px 30px;
+                border-right: 1px solid var(--glass-border);
+                box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+                transition: left 0.5s ease;
+                z-index: 999;
             }
-            .logo-text {
-                font-size: 24px;
+
+            .nav-links.active {
+                display: flex;
+                left: 0;
             }
-            .logo-box {
-                width: 50px;
-                height: 50px;
+
+            .mobile-menu-btn {
+                display: block;
+                z-index: 1000;
             }
+
             .hero {
-                padding: 30px 0 70px;
+                padding: 150px 0 60px;
             }
-            .hero-title {
-                font-size: 3.3rem;
+
+            .hero h1 {
+                font-size: 2.5rem;
             }
+
             .hero-subtitle {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
             }
-            .section-heading {
-                font-size: 2.8rem;
-                margin-bottom: 50px;
+
+            .hero-logo {
+                height: 140px;
             }
-            .section-heading.big {
-                font-size: 3rem;
+
+            .logo-ring {
+                width: 170px;
+                height: 170px;
             }
-            .section-heading::after {
-                width: 140px;
-                bottom: -15px;
-            }
-            .action-buttons {
+
+            .hero-buttons {
                 flex-direction: column;
                 align-items: center;
                 gap: 20px;
             }
-            .action-btn {
+
+            .btn {
                 width: 100%;
                 max-width: 320px;
-                min-width: auto;
+                justify-content: center;
+                padding: 16px 25px;
             }
-            .stats-grid,
-            .roadmap-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
+
+            .contract-address {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+                padding: 20px;
             }
-            .about-card,
-            .contract-box {
-                padding: 35px 25px;
+
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 40px;
             }
+            
             .chart-header {
-                padding: 25px;
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
             }
+            
             .chart-header h2 {
                 font-size: 1.8rem;
+            }
+            
+            #birdeye-embed {
+                height: 450px;
+            }
+            
+            .about-content {
+                padding: 35px 25px;
+            }
+            
+            .about-text {
+                font-size: 1.2rem;
+            }
+            
+            .feature-card, .token-card {
+                padding: 35px 25px;
+            }
+            
+            .footer-content {
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            #dexscreener-embed {
-                height: 400px;
-            }
-            .community-buttons {
-                max-width: 100%;
+                text-align: center;
             }
         }
 
         @media (max-width: 480px) {
-            .hero-title {
-                font-size: 2.7rem;
+            .hero h1 {
+                font-size: 2rem;
             }
+            
             .hero-subtitle {
-                font-size: 1.4rem;
+                font-size: 1.3rem;
             }
-            .hero-logo-container {
-                width: 160px;
-                height: 160px;
-                margin-bottom: 40px;
+            
+            .hero-logo {
+                height: 120px;
             }
-            .hero-logo-letter {
-                font-size: 70px;
+            
+            .logo-ring {
+                width: 150px;
+                height: 150px;
             }
-            .section-heading {
-                font-size: 2.3rem;
+            
+            .section-title {
+                font-size: 1.8rem;
             }
-            .section-heading.big {
-                font-size: 2.5rem;
-            }
+            
             .hero-description {
                 font-size: 1.1rem;
-                margin-bottom: 50px;
             }
-            .contract-box {
-                padding: 25px 20px;
+            
+            #birdeye-embed {
+                height: 400px;
             }
-            .address-wrapper {
+            
+            .token-value {
+                font-size: 1.8rem;
+            }
+            
+            .feature-card h3, .token-card h3 {
+                font-size: 1.5rem;
+            }
+            
+            .chart-controls {
                 flex-direction: column;
-                gap: 18px;
-                align-items: stretch;
+                gap: 15px;
             }
-            .copy-btn {
-                width: 100%;
+            
+            .timeframes {
+                flex-wrap: wrap;
                 justify-content: center;
             }
-            .stat-value {
-                font-size: 2.3rem;
-            }
-            .phase-title {
-                font-size: 1.7rem;
-            }
-            .nav-buttons {
-                gap: 10px;
-            }
-            .nav-icon-btn {
-                width: 46px;
-                height: 46px;
-                font-size: 20px;
-            }
-            .buy-btn {
-                padding: 10px 20px;
-                font-size: 14px;
-            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--accent));
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--accent), var(--primary));
         }
     </style>
 </head>
 <body>
-    <!-- Sparkle Particles Background -->
-    <div id="particles-js"></div>
-
+    <!-- Matrix Background Effect -->
+    <canvas class="matrix-bg" id="matrixCanvas"></canvas>
+    
+    <!-- Particles Background -->
+    <canvas class="particles" id="particlesCanvas"></canvas>
+    
     <!-- Header -->
     <header>
-        <div class="nav-container">
-            <div class="logo-wrapper">
-                <div class="logo-box">
-                    <div class="logo-letter">D</div>
-                </div>
-                <div class="logo-text">DUDDY</div>
+        <div class="container nav-container">
+            <div class="logo" onclick="scrollToTop()">
+                <img src="duddy-logo.png" alt="DUDDY Logo" class="logo-img">
+                <span class="logo-text">DUDDY</span>
             </div>
             
-            <div class="nav-buttons">
-                <a href="https://t.me/duddyofficial_ddy" target="_blank" class="nav-icon-btn">
-                    <i class="fab fa-telegram"></i>
-                </a>
-                <a href="https://x.com/official_duddy" target="_blank" class="nav-icon-btn x-btn">
-                    <i class="fab fa-x-twitter"></i>
-                </a>
-                <a href="https://pump.fun/coin/8M3CJC3QzKbaLcCFmyYZGVVZ5MgPVN9DNQatSLNUpump" target="_blank" class="buy-btn">
-                    <i class="fas fa-bolt"></i> Buy Now
-                </a>
-            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="#about"><i class="fas fa-info-circle"></i> ABOUT</a>
+                <a href="#chart"><i class="fas fa-chart-line"></i> LIVE CHART</a>
+                <a href="#tokenomics"><i class="fas fa-chart-pie"></i> TOKENOMICS</a>
+                <a href="#roadmap"><i class="fas fa-road"></i> ROADMAP</a>
+                <a href="#features"><i class="fas fa-star"></i> FEATURES</a>
+                <a href="#documents"><i class="fas fa-file-alt"></i> DOCUMENTS</a>
+                <a href="#social"><i class="fas fa-users"></i> COMMUNITY</a>
+            </nav>
         </div>
     </header>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
-                <div class="hero-logo-container">
-                    <div class="hero-logo-glow"></div>
-                    <div class="hero-logo-box">
-                        <div class="hero-logo-letter">DUDDY</div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-logo-container">
+                <div class="logo-ring"></div>
+                <img src="duddy-logo.png" alt="DUDDY Logo" class="hero-logo" onclick="animateLogo()">
+            </div>
+            
+            <h1 class="fade-in">RUN WITH DUDDY</h1>
+            <div class="hero-subtitle fade-in">Solana meme, one ticker, community built to outlast candles. 🐶</div>
+            <p class="hero-description fade-in">DUDDY is a meme-driven Solana coin with simple flows, and a community that actually shows up for the dog.</p>
+            
+            <div class="hero-buttons fade-in">
+                <a href="https://pump.fun/coin/8M3CJC3QzKbaLcCFmyYZGVVZ5MgPVN9DNQatSLNUpump" target="_blank" class="btn btn-primary">
+                    <i class="fas fa-bolt"></i> BUY NOW
+                </a>
+                <a href="#chart" class="btn btn-secondary">
+                    <i class="fas fa-chart-line"></i> LIVE CHART
+                </a>
+            </div>
+            
+            <div class="contract-address fade-in">
+                <div class="address-text">CA (Solana): 8M3CJC3QzKbaLcCFmyYZGVVZ5MgPVN9DNQatSLNUpump</div>
+                <button class="copy-btn" id="copyBtn">
+                    <i class="far fa-copy"></i> COPY
+                </button>
+            </div>
+            
+            <div class="hero-tagline fade-in">Join the pack that never fades when the candles fade. Loyal to the dog, bullish on the future.</div>
+        </div>
+    </section>
+
+    <!-- Live Chart Section -->
+    <section id="chart" class="chart-section">
+        <div class="container">
+            <div class="chart-container fade-in">
+                <div class="chart-header">
+                    <h2><i class="fas fa-chart-line"></i> DUDDY LIVE CHART</h2>
+                    <div class="live-indicator">
+                        <div class="live-dot"></div>
+                        <span>LIVE UPDATING</span>
+                        <span class="chart-update">Updated: <span id="updateTime">Just now</span></span>
                     </div>
                 </div>
                 
-                <h1 class="hero-title">
-                    <span class="word-du">DUD</span><span class="word-ddy">DY</span>
-                </h1>
-                
-                <div class="hero-subtitle">
-                    Solana meme, one ticker, community built to outlast candles. 🐶
+                <!-- BirdEye Chart Embed -->
+                <div id="birdeye-embed">
+                    <iframe
+                        src="https://birdeye.so/solana/token/8M3CJC3QzKbaLcCFmyYZGVVZ5MgPVN9DNQatSLNUpump"
+                        width="100%"
+                        height="650"
+                        style="border:0;border-radius:18px;overflow:hidden;"
+                        loading="lazy"
+                        allow="clipboard-write; fullscreen"
+                    ></iframe>
                 </div>
                 
-                <p class="hero-description">
-                    DUDDY is a meme-driven Solana coin with simple flows, and a community that actually shows up for the dog.
+                <div class="chart-controls">
+                    <div class="timeframes">
+                        <button class="timeframe-btn active" onclick="changeTimeframe('15m')">15m</button>
+                        <button class="timeframe-btn" onclick="changeTimeframe('1h')">1h</button>
+                        <button class="timeframe-btn" onclick="changeTimeframe('4h')">4h</button>
+                        <button class="timeframe-btn" onclick="changeTimeframe('1D')">1D</button>
+                        <button class="timeframe-btn" onclick="changeTimeframe('1W')">1W</button>
+                    </div>
+                    
+                    <button class="fullscreen-btn" onclick="openFullscreenChart()">
+                        <i class="fas fa-expand"></i> FULLSCREEN CHART
+                    </button>
+                </div>
+            </div>
+            
+            <div class="chart-info fade-in" style="margin-top: 30px; text-align: center; color: #aaa; font-size: 1rem;">
+                <p>Chart powered by BirdEye • Real-time price updates • Advanced trading tools • Volume and liquidity tracking</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" style="background: rgba(10, 10, 10, 0.7);">
+        <div class="container">
+            <h2 class="section-title fade-in">ABOUT DUDDY</h2>
+            <div class="about-content fade-in">
+                <p class="about-text">
+                    <span class="highlight">DUDDY</span> isn't just another meme coin - it's a movement. Born on Solana, built by degens, 
+                    and driven by a community that shows up. No complicated tokenomics, no hidden team allocations, 
+                    just pure meme energy with a loyal pack behind it. When the markets get rough, 
+                    <span class="highlight">DUDDY holders don't fade</span> - we run together.
                 </p>
+                <div class="about-tags">
+                    <div class="tag">MEME-DRIVEN</div>
+                    <div class="tag">COMMUNITY FIRST</div>
+                    <div class="tag">SIMPLE FLOWS</div>
+                    <div class="tag">LOYAL PACK</div>
+                    <div class="tag">SOLANA NATIVE</div>
+                    <div class="tag">OUTLAST CANDLES</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tokenomics Section -->
+    <section id="tokenomics">
+        <div class="container">
+            <h2 class="section-title fade-in">TOKENOMICS</h2>
+            <div class="tokenomics-container">
+                <div class="token-card fade-in">
+                    <div class="token-icon">
+                        <i class="fas fa-dog"></i>
+                    </div>
+                    <h3>TOTAL SUPPLY</h3>
+                    <div class="token-value">1,000,000,000</div>
+                    <p class="token-desc">1 Billion DUDDY Tokens<br>Simple. Clean. No dilution.</p>
+                </div>
                 
-                <!-- Contract Address -->
-                <div class="contract-section">
-                    <span class="contract-label">CA:</span>
-                    <div class="contract-box">
-                        <div class="address-wrapper">
-                            <div class="address-text">
-                                8M3CJC3QzKbaLcCFmyYZGVVZ5MgPVN9DNQatSLNUpump
-                            </div>
-                            <button class="copy-btn" id="copyBtn">
-                                <i class="far fa-copy"></i> Copy Address
-                            </button>
-                        </div>
+                <div class="token-card fade-in">
+                    <div class="token-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3>LIQUIDITY</h3>
+                    <div class="token-value">100% BURNED</div>
+                    <p class="token-desc">LP tokens torched forever<br>No rug pulls, just runs</p>
+                </div>
+                
+                <div class="token-card fade-in">
+                    <div class="token-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>TEAM ALLOCATION</h3>
+                    <div class="token-value">0% TEAM</div>
+                    <p class="token-desc">Zero team tokens<br>Community owns it all</p>
+                </div>
+                
+                <div class="token-card fade-in">
+                    <div class="token-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3>COMMUNITY REWARDS</h3>
+                    <div class="token-value">ACTIVE</div>
+                    <p class="token-desc">Airdrops for holders<br>Rewards for the loyal pack</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap" style="background: rgba(10, 10, 10, 0.7);">
+        <div class="container">
+            <h2 class="section-title fade-in">THE RUN</h2>
+            <div class="roadmap-container">
+                <div class="roadmap-line"></div>
+                
+                <div class="roadmap-item fade-in">
+                    <div class="roadmap-marker">1</div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-phase">PHASE 1 - PACK FORMATION <i class="fas fa-check-circle roadmap-check"></i></div>
+                        <p>Fair launch, community building, initial holders, socials setup, LP burn, and first wave of loyal dogs joining the run.</p>
                     </div>
                 </div>
                 
-                <!-- Action Buttons -->
-                <div class="action-buttons">
-                    <a href="https://pump.fun/coin/8M3CJC3QzKbaLcCFmyYZGVVZ5MgPVN9DNQatSLNUpump" target="_blank" class="action-btn primary">
-                        <i class="fas fa-bolt"></i> Buy on Pump.fun
-                    </a>
-                    <a href="#chart" class="action-btn secondary">
-                        <i class="fas fa-chart-line"></i> View Live Chart
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section class="section" id="about">
-            <div class="container">
-                <h2 class="section-heading purple">About DUDDY</h2>
-                <div class="about-card">
-                    <p class="about-text">
-                        DUDDY is revolutionizing the meme coin space with a simple yet powerful approach: 
-                        build a loyal community, deliver consistent value, and create lasting memories. 
-                        Powered by Solana's lightning-fast blockchain, we're here to stay and grow together.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Duddynomics Section -->
-        <section class="section" id="tokenomics">
-            <div class="container">
-                <h2 class="section-heading green">Duddynomics</h2>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-coins"></i>
-                        </div>
-                        <div class="stat-value">970,67M</div>
-                        <div class="stat-label">$DDY</div>
-                        <div class="stat-subtext">DUDDY</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-fire"></i>
-                        </div>
-                        <div class="stat-value">BURNED</div>
-                        <div class="stat-label">Liquidity</div>
-                        <div class="stat-subtext">🔥 Forever</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div class="stat-value">0%</div>
-                        <div class="stat-label">Taxes</div>
-                        <div class="stat-subtext">Buy / Sell</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-value">FAIR</div>
-                        <div class="stat-label">Launch</div>
-                        <div class="stat-subtext">No Presale</div>
+                <div class="roadmap-item fade-in">
+                    <div class="roadmap-marker">2</div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-phase">PHASE 2 - BUILDING THE DEN <i class="fas fa-check-circle roadmap-check"></i></div>
+                        <p>DEX listings, community growth, meme contests, holder rewards, social expansion, and establishing the DUDDY culture.</p>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Live Chart Section -->
-        <section class="section" id="chart">
-            <div class="container">
-                <div class="chart-section">
-                    <div class="chart-header">
-                        <h2><i class="fas fa-chart-line"></i> DUDDY Live Price Chart</h2>
-                        <div class="live-indicator">
-                            <div class="live-dot"></div>
-                            <span>LIVE PRICE UPDATES</span>
-                        </div>
-                    </div>
-                    
-                    <!-- DexScreener Chart Embed -->
-                    <div id="dexscreener-embed">
-                        <iframe src="https://dexscreener.com/solana/GirbxfnK5RwQaXHj5qAXQPwdJsmGyLiGSckhnXzRBiN1?embed=1&theme=dark&chartStyle=0&chartType=usd"></iframe>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Roadmap Section -->
-        <section class="section" id="roadmap">
-            <div class="container">
-                <h2 class="section-heading purple big">Roadmap</h2>
-                <div class="roadmap-grid">
-                    <div class="roadmap-card">
-                        <div class="phase-badge">Phase 1 — Launch</div>
-                        <h3 class="phase-title">Foundation</h3>
-                        <ul class="phase-items">
-                            <li class="phase-item">
-                                <i class="fas fa-bolt"></i>
-                                <span>Token Launch on Pump.fun</span>
-                            </li>
-                            <li class="phase-item">
-                                <i class="fas fa-bolt"></i>
-                                <span>Community Building</span>
-                            </li>
-                            <li class="phase-item">
-                                <i class="fas fa-bolt"></i>
-                                <span>Social Media Presence</span>
-                            </li>
-                            <li class="phase-item">
-                                <i class="fas fa-bolt"></i>
-                                <span>Website Launch</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="roadmap-card">
-                        <div class="phase-badge">Phase 2 — Growth</div>
-                        <h3 class="phase-title">Expansion</h3>
-                        <ul class="phase-items">
-                            <li class="phase-item">
-                                <i class="fas fa-bolt"></i>
-                                <span>5,000+ Holders</span>
-                            </li>
-                            <li class="phase-item">
-                                <i class="fas fa-bolt"></i>
-                                <span>CEX Listings</span>
-                            </li>
-                            <li class="phase-item">
-                                <i class="fas fa-bolt"></i>
-                                <span>Influencer Partnerships</span>
-                            </li>
-                            <li class="phase-item">
-                                <i class="fas fa-bolt"></i>
-                                <span>NFT Collection</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="roadmap-card">
-                        <div class="phase-badge">Phase 3 — Expansion</div>
-                        <h3 class="phase-title">Scale</h3>
-                        <ul class="phase-items">
-                            <li class="phase-item">
-                                <i class="fas fa-bolt"></i>
-                                <span>Major CEX Listings</span>
-                            </li>
-                            <li class="phase-item">
-                                <i class="fas fa-bolt"></i>
-                                <span>DUDDY Merchandise</span>
-                            </li>
-                            <li class="phase-item">
-                                <i class="fas fa-bolt"></i>
-                                <span>Charity Initiatives</span>
-                            </li>
-                            <li class="phase-item">
-                                <i class="fas fa-bolt"></i>
-                                <span>Global Marketing</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="roadmap-card">
-                        <div class="phase-badge">Phase 4 — Moon</div>
-                        <h3 class="phase-title">Dominance</h3>
-                        <ul class="phase-items">
-                            <li class="phase-item">
-                                <i class="fas fa-bolt"></i>
-                                <span>Mass Adoption</span>
-                            </li>
-                            <li class="phase-item">
-                                <i class="fas fa-bolt"></i>
-                                <span>DUDDY Ecosystem</span>
-                            </li>
-                            <li class="phase-item">
-                                <i class="fas fa-bolt"></i>
-                                <span>DAO Governance</span>
-                            </li>
-                            <li class="phase-item">
-                                <i class="fas fa-bolt"></i>
-                                <span>To The Moon! 🚀</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Community Section -->
-        <section class="section" id="community">
-            <div class="container">
-                <h2 class="section-heading green">
-                    <span style="color: white;">Join The </span>
-                    <span style="color: var(--primary-green);">DUDDY</span>
-                    <span style="color: white;"> Community</span>
-                </h2>
                 
-                <div class="community-buttons">
-                    <a href="https://t.me/duddyofficial_ddy" target="_blank" class="community-btn btn-telegram">
-                        <i class="fab fa-telegram"></i> Telegram
-                    </a>
-                    
-                    <a href="https://x.com/official_duddy" target="_blank" class="community-btn btn-x">
-                        <i class="fab fa-x-twitter"></i> X (Twitter)
-                    </a>
-                    
-                    <a href="https://duddy.fun" target="_blank" class="community-btn btn-webapp">
-                        <i class="fas fa-external-link-alt"></i> Web App
-                    </a>
+                <div class="roadmap-item fade-in">
+                    <div class="roadmap-marker">3</div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-phase">PHASE 3 - RUNNING WILD</div>
+                        <p>Major partnerships, influencer onboarding, trading tools, NFT integration, and taking the meme to the masses.</p>
+                    </div>
+                </div>
+                
+                <div class="roadmap-item fade-in">
+                    <div class="roadmap-marker">4</div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-phase">PHASE 4 - ALPHA STATUS</div>
+                        <p>Top exchange listings, merchandise launch, community events, and establishing DUDDY as a Solana meme legend.</p>
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="container">
+            <h2 class="section-title fade-in">WHY RUN WITH DUDDY</h2>
+            <div class="features-container">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>LOYAL COMMUNITY</h3>
+                    <p>A pack that actually shows up. No paper hands, just diamond-pawed degens who believe in the dog.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>SIMPLE FLOWS</h3>
+                    <p>No complicated tokenomics. Buy, hold, meme, repeat. Clean execution on Solana's fastest chain.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>SECURE DEN</h3>
+                    <p>LP burned, contract renounced, zero team tokens. Your investment is as secure as the pack is loyal.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3>HOLDER REWARDS</h3>
+                    <p>Regular airdrops for the loyal pack. The longer you hold, the more you're rewarded.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3>MEME POWER</h3>
+                    <p>Pure meme energy. When the market fades, we create the hype. Community-driven content and virality.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <h3>DOG ENERGY</h3>
+                    <p>The loyalty of a dog, the tenacity of a bull. We outlast candles and build through any market.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documents Section -->
+    <section id="documents" style="background: rgba(10, 10, 10, 0.7);">
+        <div class="container">
+            <h2 class="section-title fade-in">PACK RESOURCES</h2>
+            <div class="documents-container">
+                <div class="doc-card fade-in">
+                    <div class="doc-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>HOW TO BUY</h3>
+                    <p>Step-by-step guide to getting DUDDY on Solana. Simple instructions for new degens.</p>
+                    <a href="https://pump.fun/coin/8M3CJC3QzKbaLcCFmyYZGVVZ5MgPVN9DNQatSLNUpump" target="_blank" class="doc-btn">BUY GUIDE</a>
+                </div>
+                
+                <div class="doc-card fade-in">
+                    <div class="doc-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>MEME KIT</h3>
+                    <p>Official memes, graphics, and templates. Everything you need to spread the DUDDY word.</p>
+                    <a href="#" class="doc-btn" onclick="downloadBrandKit()">GET MEMES</a>
+                </div>
+                
+                <div class="doc-card fade-in">
+                    <div class="doc-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>CHART</h3>
+                    <p>Live price chart and trading data. Watch the run in real-time with our community.</p>
+                    <a href="#chart" class="doc-btn">VIEW CHART</a>
+                </div>
+                
+                <div class="doc-card fade-in">
+                    <div class="doc-icon">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <h3>JOIN THE PACK</h3>
+                    <p>Ready to run with DUDDY? Connect with the community and become part of the legend.</p>
+                    <a href="#social" class="doc-btn">JOIN NOW</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Links Section -->
+    <section id="social">
+        <div class="container">
+            <h2 class="section-title fade-in">JOIN THE PACK</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; font-size: 1.3rem; color: #ccc;" class="fade-in">
+                The pack runs together. Connect with fellow DUDDY holders across all platforms.
+            </p>
+            
+            <div class="social-container">
+                <a href="https://x.com/official_duddy" target="_blank" class="social-link fade-in">
+                    <i class="fab fa-x-twitter social-icon"></i>
+                    <span class="social-text">X (TWITTER)</span>
+                </a>
+                
+                <a href="https://t.me/duddyofficial_ddy" target="_blank" class="social-link fade-in">
+                    <i class="fab fa-telegram social-icon"></i>
+                    <span class="social-text">TELEGRAM</span>
+                </a>
+                
+                <a href="https://discord.gg/aKgK2RDep" target="_blank" class="social-link fade-in">
+                    <i class="fab fa-discord social-icon"></i>
+                    <span class="social-text">DISCORD</span>
+                </a>
+                
+                <a href="https://whatsapp.com/channel/0029VbBmrsNHLHQY5eylWR2d" target="_blank" class="social-link fade-in">
+                    <i class="fab fa-whatsapp social-icon"></i>
+                    <span class="social-text">WHATSAPP</span>
+                </a>
+                
+                <a href="#chart" class="social-link fade-in">
+                    <i class="fas fa-chart-line social-icon"></i>
+                    <span class="social-text">LIVE CHART</span>
+                </a>
+                
+                <a href="https://pump.fun/coin/8M3CJC3QzKbaLcCFmyYZGVVZ5MgPVN9DNQatSLNUpump" target="_blank" class="social-link fade-in">
+                    <i class="fas fa-shopping-cart social-icon"></i>
+                    <span class="social-text">BUY DUDDY</span>
+                </a>
+                
+                <a href="https://duddy.fun" target="_blank" class="social-link fade-in">
+                    <i class="fas fa-globe social-icon"></i>
+                    <span class="social-text">WEBSITE</span>
+                </a>
+                
+                <a href="mailto:official@duddy.fun" class="social-link fade-in">
+                    <i class="fas fa-envelope social-icon"></i>
+                    <span class="social-text">EMAIL</span>
+                </a>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-logo">
-                <div class="footer-logo-box">
-                    <div class="footer-logo-letter">D</div>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <img src="duddy-logo.png" alt="DUDDY Logo" class="logo-img">
+                        <span class="logo-text">DUDDY</span>
+                    </div>
+                    <p style="color: #aaa; line-height: 1.6; font-size: 1.1rem;">
+                        Run with the pack. Outlast the candles. Loyal to the dog. 🐶
+                    </p>
+                    <div class="contract-address" style="margin-top: 25px; max-width: 100%; padding: 15px;">
+                        <div class="address-text" style="font-size: 0.85rem;">8M3CJC3QzKbaLcCFmyYZGVVZ5MgPVN9DNQatSLNUpump</div>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>THE RUN</h3>
+                        <a href="#about">About DUDDY</a>
+                        <a href="#chart">Live Chart</a>
+                        <a href="#tokenomics">Tokenomics</a>
+                        <a href="#roadmap">The Run</a>
+                        <a href="#features">Why DUDDY</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>GET DUDDY</h3>
+                        <a href="https://pump.fun/coin/8M3CJC3QzKbaLcCFmyYZGVVZ5MgPVN9DNQatSLNUpump" target="_blank">Buy Now</a>
+                        <a href="#chart">Live Chart</a>
+                        <a href="#" onclick="showAirdropInfo()">Airdrops</a>
+                        <a href="#documents">How to Buy</a>
+                        <a href="#social">Join Community</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>THE PACK</h3>
+                        <a href="https://x.com/official_duddy" target="_blank">Twitter/X</a>
+                        <a href="https://t.me/duddyofficial_ddy" target="_blank">Telegram</a>
+                        <a href="https://discord.gg/aKgK2RDep" target="_blank">Discord</a>
+                        <a href="https://whatsapp.com/channel/0029VbBmrsNHLHQY5eylWR2d" target="_blank">WhatsApp</a>
+                        <a href="mailto:official@duddy.fun">Email Pack</a>
+                    </div>
                 </div>
             </div>
             
-            <p class="footer-text">
-                © 2026 DUDDY. All rights reserved. Not financial advice.
-            </p>
-            
-            <div class="footer-social">
-                <a href="https://t.me/duddyofficial_ddy" target="_blank" class="nav-icon-btn">
-                    <i class="fab fa-telegram"></i>
-                </a>
-                <a href="https://x.com/official_duddy" target="_blank" class="nav-icon-btn x-btn">
-                    <i class="fab fa-x-twitter"></i>
-                </a>
+            <div class="copyright">
+                © 2023 DUDDY COIN. RUN WITH THE PACK. OUTLAST THE CANDLES. 🐶
             </div>
         </div>
     </footer>
 
-    <!-- Particle.js Library -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    
     <script>
-        // Initialize particle background
-        document.addEventListener('DOMContentLoaded', function() {
-            particlesJS('particles-js', {
-                particles: {
-                    number: { value: 80, density: { enable: true, value_area: 800 } },
-                    color: { value: ["#00ff88", "#9d4edd", "#4dffaa", "#b87eff"] },
-                    shape: { type: "circle" },
-                    opacity: { 
-                        value: 0.5,
-                        random: true,
-                        anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
-                    },
-                    size: { 
-                        value: 3, 
-                        random: true,
-                        anim: { enable: true, speed: 2, size_min: 0.5, sync: false }
-                    },
-                    line_linked: {
-                        enable: true,
-                        distance: 150,
-                        color: "rgba(0, 255, 136, 0.2)",
-                        opacity: 0.3,
-                        width: 1
-                    },
-                    move: {
-                        enable: true,
-                        speed: 1,
-                        direction: "none",
-                        random: true,
-                        straight: false,
-                        out_mode: "out",
-                        bounce: false,
-                        attract: { enable: false, rotateX: 600, rotateY: 1200 }
+        // Matrix background effect
+        const matrixCanvas = document.getElementById('matrixCanvas');
+        const matrixCtx = matrixCanvas.getContext('2d');
+        
+        matrixCanvas.width = window.innerWidth;
+        matrixCanvas.height = window.innerHeight;
+        
+        const letters = 'DUDDY🐶0101DUDDY🐶0101DUDDY🐶0101';
+        const lettersArray = letters.split('');
+        const fontSize = 16;
+        const columns = matrixCanvas.width / fontSize;
+        const matrixDrops = [];
+        
+        for (let i = 0; i < columns; i++) {
+            matrixDrops[i] = Math.floor(Math.random() * matrixCanvas.height / fontSize);
+        }
+        
+        function drawMatrix() {
+            matrixCtx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+            
+            matrixCtx.fillStyle = '#00ff88';
+            matrixCtx.font = `${fontSize}px 'Courier New', monospace`;
+            
+            for (let i = 0; i < matrixDrops.length; i++) {
+                const text = lettersArray[Math.floor(Math.random() * lettersArray.length)];
+                const x = i * fontSize;
+                const y = matrixDrops[i] * fontSize;
+                
+                matrixCtx.fillText(text, x, y);
+                
+                if (y > matrixCanvas.height && Math.random() > 0.975) {
+                    matrixDrops[i] = 0;
+                }
+                
+                matrixDrops[i]++;
+            }
+        }
+        
+        // Particles background effect
+        const particlesCanvas = document.getElementById('particlesCanvas');
+        const particlesCtx = particlesCanvas.getContext('2d');
+        
+        particlesCanvas.width = window.innerWidth;
+        particlesCanvas.height = window.innerHeight;
+        
+        const particles = [];
+        const particleCount = 100;
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * particlesCanvas.width;
+                this.y = Math.random() * particlesCanvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.color = `rgba(0, 255, 136, ${Math.random() * 0.5 + 0.1})`;
+            }
+            
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                if (this.x > particlesCanvas.width) this.x = 0;
+                else if (this.x < 0) this.x = particlesCanvas.width;
+                
+                if (this.y > particlesCanvas.height) this.y = 0;
+                else if (this.y < 0) this.y = particlesCanvas.height;
+            }
+            
+            draw() {
+                particlesCtx.fillStyle = this.color;
+                particlesCtx.beginPath();
+                particlesCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                particlesCtx.fill();
+            }
+        }
+        
+        function initParticles() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+        
+        function animateParticles() {
+            particlesCtx.clearRect(0, 0, particlesCanvas.width, particlesCanvas.height);
+            
+            for (let particle of particles) {
+                particle.update();
+                particle.draw();
+                
+                // Connect particles with lines
+                for (let otherParticle of particles) {
+                    const dx = particle.x - otherParticle.x;
+                    const dy = particle.y - otherParticle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 100) {
+                        particlesCtx.beginPath();
+                        particlesCtx.strokeStyle = `rgba(0, 255, 136, ${0.2 * (1 - distance/100)})`;
+                        particlesCtx.lineWidth = 0.5;
+                        particlesCtx.moveTo(particle.x, particle.y);
+                        particlesCtx.lineTo(otherParticle.x, otherParticle.y);
+                        particlesCtx.stroke();
                     }
-                },
-                interactivity: {
-                    detect_on: "canvas",
-                    events: {
-                        onhover: { enable: true, mode: "repulse" },
-                        onclick: { enable: true, mode: "push" },
-                        resize: true
-                    }
-                },
-                retina_detect: true
+                }
+            }
+            
+            requestAnimationFrame(animateParticles);
+        }
+        
+        // Initialize animations
+        setInterval(drawMatrix, 50);
+        initParticles();
+        animateParticles();
+        
+        // Resize canvases on window resize
+        window.addEventListener('resize', function() {
+            matrixCanvas.width = window.innerWidth;
+            matrixCanvas.height = window.innerHeight;
+            particlesCanvas.width = window.innerWidth;
+            particlesCanvas.height = window.innerHeight;
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
             });
         });
-
-        // Copy to clipboard functionality
+        
+        // Copy contract address functionality
         const copyBtn = document.getElementById('copyBtn');
         const contractAddress = "8M3CJC3QzKbaLcCFmyYZGVVZ5MgPVN9DNQatSLNUpump";
         
         copyBtn.addEventListener('click', () => {
             navigator.clipboard.writeText(contractAddress).then(() => {
                 const originalText = copyBtn.innerHTML;
-                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> COPIED!';
                 copyBtn.classList.add('copied');
+                
+                // Show notification
+                showNotification('Contract address copied to clipboard! 🐶');
                 
                 setTimeout(() => {
                     copyBtn.innerHTML = originalText;
@@ -1435,7 +1947,72 @@
                 }, 2000);
             });
         });
-
+        
+        // Chart functionality
+        const updateTimeElement = document.getElementById('updateTime');
+        const timeframeButtons = document.querySelectorAll('.timeframe-btn');
+        
+        // Update time function
+        function updateChartTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+            updateTimeElement.textContent = timeString;
+        }
+        
+        // Update time every second
+        setInterval(updateChartTime, 1000);
+        updateChartTime(); // Initial update
+        
+        // Timeframe change function
+        function changeTimeframe(timeframe) {
+            timeframeButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Find and activate the clicked button
+            const buttons = Array.from(timeframeButtons);
+            const clickedButton = buttons.find(btn => btn.textContent === timeframe);
+            if (clickedButton) {
+                clickedButton.classList.add('active');
+            }
+            
+            // Note: BirdEye embed doesn't support direct timeframe parameter changes
+            // But we can update the URL if needed in the future
+            showNotification(`Chart timeframe set to ${timeframe}`);
+        }
+        
+        // Fullscreen chart function
+        function openFullscreenChart() {
+            const fullscreenUrl = 'https://birdeye.so/solana/token/8M3CJC3QzKbaLcCFmyYZGVVZ5MgPVN9DNQatSLNUpump';
+            window.open(fullscreenUrl, '_blank');
+            showNotification('Opening fullscreen chart in new tab...');
+        }
+        
+        // Scroll animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const roadmapItems = document.querySelectorAll('.roadmap-item');
+        
+        const fadeInOnScroll = () => {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+            
+            roadmapItems.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (itemTop < windowHeight - 100) {
+                    item.classList.add('visible');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', fadeInOnScroll);
+        window.addEventListener('load', fadeInOnScroll);
+        
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -1447,35 +2024,181 @@
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     window.scrollTo({
-                        top: targetElement.offsetTop - 100,
+                        top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
                 }
             });
         });
-
-        // Add subtle animation to cards on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
+        
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
-        }, observerOptions);
-
-        // Observe cards for animation
-        document.querySelectorAll('.stat-card, .roadmap-card, .about-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
+        }
+        
+        // Animate logo on click
+        function animateLogo() {
+            const logo = document.querySelector('.hero-logo');
+            logo.style.transform = 'scale(1.3) rotate(360deg)';
+            logo.style.filter = 'drop-shadow(0 0 60px var(--primary))';
+            
+            // Add dog sound effect notification
+            showNotification('Woof! 🐶 The pack is running!');
+            
+            setTimeout(() => {
+                logo.style.transform = '';
+                logo.style.filter = '';
+            }, 1000);
+        }
+        
+        // Show notification function
+        function showNotification(message) {
+            // Remove existing notification
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerHTML = `
+                <div style="
+                    position: fixed;
+                    top: 100px;
+                    right: 20px;
+                    background: linear-gradient(90deg, var(--primary), var(--accent));
+                    color: var(--dark);
+                    padding: 15px 25px;
+                    border-radius: 10px;
+                    font-weight: bold;
+                    font-family: 'Orbitron', sans-serif;
+                    z-index: 10000;
+                    box-shadow: 0 5px 20px rgba(0, 255, 136, 0.3);
+                    animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s;
+                ">
+                    ${message}
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Add animation styles
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes fadeOut {
+                    from { opacity: 1; }
+                    to { opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+                if (style.parentNode) {
+                    style.remove();
+                }
+            }, 3000);
+        }
+        
+        // Document functions
+        function downloadBrandKit() {
+            showNotification('Meme kit loading... Get ready to spread the DUDDY word! 🐶');
+            // In production: window.open('https://duddy.fun/meme-kit.zip', '_blank');
+        }
+        
+        function showAirdropInfo() {
+            showNotification('Hold DUDDY tokens to qualify for pack airdrops! Loyalty rewarded. 🎁');
+        }
+        
+        // Initialize on load
+        window.addEventListener('load', () => {
+            // Trigger initial fade-in
+            fadeInOnScroll();
+            
+            // Show welcome notification
+            setTimeout(() => {
+                showNotification('Welcome to the pack! Run with DUDDY 🐶');
+            }, 1000);
+            
+            // Add fun dog sounds on certain interactions
+            const buttons = document.querySelectorAll('.btn, .tag, .social-link, .timeframe-btn, .fullscreen-btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // 10% chance of dog sound notification
+                    if (Math.random() < 0.1) {
+                        const dogSounds = ['Woof! 🐶', 'Arf! 🐕', 'Bark! 🦮', 'The pack grows! 🐾'];
+                        const randomSound = dogSounds[Math.floor(Math.random() * dogSounds.length)];
+                        showNotification(randomSound);
+                    }
+                });
+            });
         });
+        
+        // Add cursor trail effect
+        document.addEventListener('mousemove', (e) => {
+            const trail = document.createElement('div');
+            trail.style.position = 'fixed';
+            trail.style.left = e.clientX + 'px';
+            trail.style.top = e.clientY + 'px';
+            trail.style.width = '10px';
+            trail.style.height = '10px';
+            trail.style.backgroundColor = 'rgba(0, 255, 136, 0.3)';
+            trail.style.borderRadius = '50%';
+            trail.style.pointerEvents = 'none';
+            trail.style.zIndex = '9999';
+            document.body.appendChild(trail);
+            
+            setTimeout(() => {
+                trail.remove();
+            }, 500);
+        });
+        
+        // Add fun page title animation
+        let originalTitle = document.title;
+        let isTitleChanged = false;
+        
+        function animateTitle() {
+            if (!isTitleChanged) {
+                document.title = '🐶 DUDDY - Run with the pack!';
+                isTitleChanged = true;
+                setTimeout(() => {
+                    document.title = originalTitle;
+                    isTitleChanged = false;
+                }, 2000);
+            }
+        }
+        
+        // Animate title every 30 seconds
+        setInterval(animateTitle, 30000);
+        
+        // Also animate on visibility change
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                animateTitle();
+            }
+        });
+        
+        // Auto-refresh chart every 30 seconds (optional)
+        function refreshChart() {
+            const chartIframe = document.querySelector('#birdeye-embed iframe');
+            if (chartIframe) {
+                chartIframe.src = chartIframe.src;
+            }
+        }
+        
+        // Uncomment the line below to enable auto-refresh every 30 seconds
+        // setInterval(refreshChart, 30000);
     </script>
 </body>
 </html>
