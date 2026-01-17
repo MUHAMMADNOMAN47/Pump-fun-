@@ -3,172 +3,1479 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DUDDY - The Coolest Meme Coin on Solana</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Fredoka:wght@700&display=swap" rel="stylesheet">
+    <title>DUDDY - Solana Meme Coin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body { 
-            font-family: 'Inter', sans-serif; 
-            margin: 0; 
-            padding: 0; 
-            background: linear-gradient(to bottom, #6A1B9A, #0D47A1); /* Purple to blue gradient from your logo */
-            color: #fff; 
+        :root {
+            --primary-green: #00ff88;
+            --primary-green-light: #4dffaa;
+            --primary-green-dark: #00cc6a;
+            --accent-purple: #9d4edd;
+            --accent-purple-light: #b87eff;
+            --accent-purple-dark: #7b2cbf;
+            --dark-bg: #05110b;
+            --dark-bg-gradient: linear-gradient(135deg, #05110b 0%, #0a1a12 50%, #05110b 100%);
+            --card-bg: rgba(10, 26, 18, 0.85);
+            --text-primary: #ffffff;
+            --text-secondary: #c8f5de;
+            --text-muted: #88c9aa;
+            --sparkle-color: rgba(255, 255, 255, 0.7);
         }
-        header { 
-            background: rgba(0, 191, 165, 0.8); /* Teal from logo */
-            padding: 10px 20px; 
-            position: sticky; 
-            top: 0; 
-            z-index: 10; 
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        nav { 
-            max-width: 1200px; 
-            margin: auto; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark-bg-gradient);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
         }
-        .logo { 
-            font-family: 'Fredoka', sans-serif; 
-            font-size: 28px; 
-            color: #fff; 
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3); 
+
+        /* Sparkle/Star Particles Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            pointer-events: none;
         }
-        .nav-links a { 
-            margin-left: 15px; 
-            text-decoration: none; 
-            color: #fff; 
-            font-weight: bold; 
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(5, 17, 11, 0.92);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.15);
+            padding: 18px 0;
         }
-        .buy-btn { 
-            background: #00BFA5; /* Green/teal */
-            padding: 8px 16px; 
-            border-radius: 5px; 
-            color: #fff; 
-            font-weight: bold; 
-            text-decoration: none; 
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .hero { 
-            text-align: center; 
-            padding: 100px 20px; 
-            background: url('duddy-background.jpg') no-repeat center/cover; /* Add a fun background if you have one */
+
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
-        .hero h1 { 
-            font-family: 'Fredoka', sans-serif; 
-            font-size: 80px; 
-            margin: 0; 
-            background: linear-gradient(to right, #6A1B9A, #00BFA5); /* Purple to teal gradient */
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            text-shadow: 4px 4px 8px rgba(0,0,0,0.5); 
+
+        .logo-box {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.25);
+            animation: gentlePulse 4s ease-in-out infinite;
+            overflow: hidden;
         }
-        .hero img.logo-img { 
-            width: 300px; /* Your DUDDY logo */
-            margin: 20px 0; 
+
+        @keyframes gentlePulse {
+            0%, 100% { transform: translateY(0px) scale(1); box-shadow: 0 8px 25px rgba(0, 255, 136, 0.25); }
+            50% { transform: translateY(-4px) scale(1.02); box-shadow: 0 12px 35px rgba(0, 255, 136, 0.4); }
         }
-        .hero p { 
-            font-size: 24px; 
-            margin: 10px 0; 
+
+        .logo-box .logo-letter {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 32px;
+            color: var(--dark-bg);
         }
-        .ca { 
-            background: rgba(255,255,255,0.2); 
-            padding: 10px; 
-            border-radius: 5px; 
-            display: inline-block; 
-            font-size: 14px; 
+
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 28px;
+            background: linear-gradient(90deg, var(--primary-green) 0%, var(--primary-green) 55%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 0.5px;
+            animation: colorShift 8s infinite alternate;
         }
-        .characters { 
-            display: flex; 
-            justify-content: center; 
-            gap: 20px; 
-            margin: 20px 0; 
+
+        @keyframes colorShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
-        .characters img { 
-            width: 100px; /* Placeholder for dog characters */
-            animation: bounce 2s infinite; 
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
         }
-        @keyframes bounce { 
-            0%, 100% { transform: translateY(0); } 
-            50% { transform: translateY(-10px); } 
+
+        .nav-icon-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            background: rgba(0, 255, 136, 0.08);
+            border: 1.5px solid rgba(0, 255, 136, 0.2);
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 22px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .section { 
-            max-width: 1200px; 
-            margin: 50px auto; 
-            padding: 20px; 
-            background: rgba(13, 71, 161, 0.8); /* Blue overlay */
-            border-radius: 10px; 
+
+        .nav-icon-btn.x-btn {
+            color: var(--text-primary);
+            background: rgba(29, 29, 29, 0.9);
+            border-color: rgba(255, 255, 255, 0.15);
         }
-        .section h2 { 
-            font-family: 'Fredoka', sans-serif; 
-            font-size: 36px; 
-            text-align: center; 
-            color: #00BFA5; 
+
+        .nav-icon-btn:hover {
+            transform: translateY(-5px) scale(1.08);
+            background: rgba(0, 255, 136, 0.2);
+            border-color: var(--primary-green);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
         }
-        footer { 
-            text-align: center; 
-            padding: 20px; 
-            background: #6A1B9A; 
-            font-size: 14px; 
+
+        .nav-icon-btn.x-btn:hover {
+            background: rgba(0, 0, 0, 0.9);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
-        @media (max-width: 768px) { 
-            .hero h1 { font-size: 50px; } 
-            .characters { flex-wrap: wrap; } 
-            .nav-links { display: flex; flex-direction: column; } 
+
+        .buy-btn {
+            padding: 13px 28px;
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
+            border: none;
+            border-radius: 14px;
+            color: var(--dark-bg);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.3);
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.5);
+            background: linear-gradient(135deg, var(--primary-green-light), var(--primary-green));
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 130px;
+        }
+
+        .section {
+            padding: 90px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 40px 0 100px;
+        }
+
+        .hero-logo-container {
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 50px;
+            position: relative;
+        }
+
+        .hero-logo-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(ellipse at center, rgba(0, 255, 136, 0.25) 0%, transparent 70%);
+            filter: blur(45px);
+            border-radius: 50%;
+            z-index: -1;
+            animation: glowPulse 5s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        .hero-logo-box {
+            width: 100%;
+            height: 100%;
+            background: var(--card-bg);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-logo-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-green), var(--accent-purple), transparent);
+        }
+
+        .hero-logo-letter {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 100px;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: floatLogo 6s ease-in-out infinite;
+        }
+
+        @keyframes floatLogo {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-12px) rotate(1deg); }
+            75% { transform: translateY(8px) rotate(-1deg); }
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 5.2rem;
+            margin-bottom: 20px;
+            line-height: 1;
+            letter-spacing: 1px;
+        }
+
+        .hero-title .word-du {
+            color: var(--primary-green);
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+            animation: textGlowGreen 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlowGreen {
+            0% { text-shadow: 0 0 20px rgba(0, 255, 136, 0.5), 0 0 40px rgba(0, 255, 136, 0.2); }
+            100% { text-shadow: 0 0 30px rgba(0, 255, 136, 0.7), 0 0 60px rgba(0, 255, 136, 0.3); }
+        }
+
+        .hero-title .word-ddy {
+            color: var(--accent-purple);
+            text-shadow: 0 0 30px rgba(157, 78, 221, 0.5);
+            animation: textGlowPurple 3s ease-in-out infinite alternate;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes textGlowPurple {
+            0% { text-shadow: 0 0 20px rgba(157, 78, 221, 0.5), 0 0 40px rgba(157, 78, 221, 0.2); }
+            100% { text-shadow: 0 0 30px rgba(157, 78, 221, 0.7), 0 0 60px rgba(157, 78, 221, 0.3); }
+        }
+
+        .hero-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            font-weight: 600;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto 60px;
+            line-height: 1.7;
+        }
+
+        /* Contract Address */
+        .contract-section {
+            max-width: 720px;
+            margin: 0 auto 60px;
+        }
+
+        .contract-box {
+            background: var(--card-bg);
+            border: 1.5px solid rgba(0, 255, 136, 0.25);
+            border-radius: 20px;
+            padding: 28px;
+            backdrop-filter: blur(15px);
+            box-shadow: 
+                0 15px 45px rgba(0, 0, 0, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contract-box:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-green);
+            box-shadow: 
+                0 25px 60px rgba(0, 0, 0, 0.45),
+                0 0 0 1px rgba(0, 255, 136, 0.15);
+        }
+
+        .contract-label {
+            color: var(--primary-green);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: block;
+            letter-spacing: 1px;
+        }
+
+        .address-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .address-text {
+            font-family: 'Courier New', 'SF Mono', monospace;
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            word-break: break-all;
+            flex: 1;
+            letter-spacing: 0.5px;
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.15), rgba(157, 78, 221, 0.15));
+            border: 1.5px solid rgba(0, 255, 136, 0.3);
+            border-radius: 12px;
+            color: var(--primary-green);
+            padding: 12px 26px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .copy-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.25), rgba(157, 78, 221, 0.25));
+            border-color: var(--primary-green);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 255, 136, 0.2);
+        }
+
+        .copy-btn.copied {
+            background: var(--accent-purple);
+            border-color: var(--accent-purple);
+            color: white;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            margin-bottom: 100px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 20px 42px;
+            border-radius: 18px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            min-width: 240px;
+            justify-content: center;
+            letter-spacing: 0.8px;
+        }
+
+        .action-btn.primary {
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
+            color: var(--dark-bg);
+            border: none;
+            box-shadow: 0 15px 35px rgba(0, 255, 136, 0.35);
+        }
+
+        .action-btn.secondary {
+            background: transparent;
+            color: var(--primary-green);
+            border: 2.5px solid var(--primary-green);
+            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.15);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-8px);
+        }
+
+        .action-btn.primary:hover {
+            box-shadow: 0 25px 50px rgba(0, 255, 136, 0.5);
+            background: linear-gradient(135deg, var(--primary-green-light), var(--primary-green));
+        }
+
+        .action-btn.secondary:hover {
+            background: rgba(0, 255, 136, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.25);
+        }
+
+        /* Section Headings */
+        .section-heading {
+            text-align: center;
+            margin-bottom: 70px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-green), var(--accent-purple));
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .section-heading.purple {
+            font-size: 3.8rem;
+            color: var(--accent-purple);
+            text-shadow: 0 0 30px rgba(157, 78, 221, 0.4);
+        }
+
+        .section-heading.green {
+            font-size: 3.8rem;
+            color: var(--primary-green);
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
+        }
+
+        .section-heading.big {
+            font-size: 4.2rem;
+        }
+
+        /* About Section */
+        .about-card {
+            background: var(--card-bg);
+            border: 1.5px solid rgba(157, 78, 221, 0.25);
+            border-radius: 24px;
+            padding: 55px;
+            backdrop-filter: blur(15px);
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            max-width: 880px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s ease;
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-purple), transparent);
+        }
+
+        .about-text {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Duddynomics Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1.5px solid rgba(0, 255, 136, 0.2);
+            border-radius: 24px;
+            padding: 40px 30px;
+            backdrop-filter: blur(15px);
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-green), transparent);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            border-color: var(--primary-green);
+            box-shadow: 
+                0 25px 60px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(0, 255, 136, 0.2);
+        }
+
+        .stat-icon {
+            width: 85px;
+            height: 85px;
+            background: rgba(0, 255, 136, 0.12);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 36px;
+            color: var(--primary-green);
+            position: relative;
+            border: 2px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .stat-icon::after {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 255, 136, 0.15);
+            animation: rotateRing 8s linear infinite;
+        }
+
+        @keyframes rotateRing {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.35rem;
+            color: var(--primary-green);
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-subtext {
+            font-size: 1rem;
+            color: var(--text-muted);
+            letter-spacing: 0.3px;
+        }
+
+        /* Roadmap Section */
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        .roadmap-card {
+            background: var(--card-bg);
+            border: 1.5px solid rgba(157, 78, 221, 0.2);
+            border-radius: 24px;
+            padding: 40px 35px;
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .roadmap-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: linear-gradient(to bottom, var(--primary-green), var(--accent-purple));
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+        }
+
+        .roadmap-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--accent-purple);
+            box-shadow: 
+                0 30px 70px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(157, 78, 221, 0.2);
+        }
+
+        .phase-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
+            color: var(--dark-bg);
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            letter-spacing: 0.8px;
+            box-shadow: 0 8px 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .phase-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        .phase-items {
+            list-style: none;
+        }
+
+        .phase-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .phase-item i {
+            color: var(--accent-purple);
+            font-size: 14px;
+            margin-top: 7px;
+            animation: boltBlink 2s infinite;
+        }
+
+        @keyframes boltBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Chart Section */
+        .chart-section {
+            background: linear-gradient(to bottom, rgba(5, 17, 11, 0.7), rgba(10, 26, 18, 0.9));
+            border-radius: 30px;
+            margin: 60px 24px;
+            overflow: hidden;
+            border: 1.5px solid rgba(0, 255, 136, 0.2);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .chart-header {
+            padding: 30px 40px;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.15);
+            background: rgba(5, 17, 11, 0.8);
+        }
+
+        .chart-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-green);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            background: rgba(0, 255, 136, 0.1);
+            padding: 8px 18px;
+            border-radius: 30px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            margin-top: 15px;
+            display: inline-flex;
+        }
+
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--primary-green);
+            border-radius: 50%;
+            animation: livePulse 1.5s infinite;
+        }
+
+        @keyframes livePulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        #dexscreener-embed {
+            position: relative;
+            width: 100%;
+            height: 550px;
+        }
+
+        #dexscreener-embed iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border: 0;
+        }
+
+        /* Community Section */
+        .community-buttons {
+            max-width: 420px;
+            margin: 60px auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .community-btn {
+            padding: 22px 32px;
+            border-radius: 18px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            text-decoration: none;
+            border: none;
+            letter-spacing: 0.8px;
+        }
+
+        .community-btn:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+        }
+
+        .btn-telegram {
+            background: #0088cc;
+            color: white;
+            box-shadow: 0 15px 35px rgba(0, 136, 204, 0.3);
+        }
+
+        .btn-telegram:hover {
+            box-shadow: 0 25px 50px rgba(0, 136, 204, 0.5);
+        }
+
+        .btn-x {
+            background: #000000;
+            color: white;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-x:hover {
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-webapp {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-purple-dark));
+            color: white;
+            box-shadow: 0 15px 35px rgba(157, 78, 221, 0.3);
+        }
+
+        .btn-webapp:hover {
+            box-shadow: 0 25px 50px rgba(157, 78, 221, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 0 50px;
+            text-align: center;
+            border-top: 1.5px solid rgba(0, 255, 136, 0.15);
+            background: linear-gradient(to top, rgba(5, 17, 11, 0.95), transparent);
+            margin-top: 80px;
+        }
+
+        .footer-logo {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 30px;
+        }
+
+        .footer-logo-box {
+            width: 100%;
+            height: 100%;
+            background: var(--card-bg);
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(0, 255, 136, 0.25);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer-logo-letter {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 42px;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+            margin-bottom: 40px;
+        }
+
+        .footer-social .nav-icon-btn {
+            width: 56px;
+            height: 56px;
+            font-size: 24px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 4.2rem;
+            }
+            .section-heading {
+                font-size: 3.2rem;
+            }
+            .section-heading.big {
+                font-size: 3.5rem;
+            }
+            .hero-logo-container {
+                width: 190px;
+                height: 190px;
+            }
+            .hero-logo-letter {
+                font-size: 85px;
+            }
+            #dexscreener-embed {
+                height: 480px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 18px;
+            }
+            .logo-text {
+                font-size: 24px;
+            }
+            .logo-box {
+                width: 50px;
+                height: 50px;
+            }
+            .hero {
+                padding: 30px 0 70px;
+            }
+            .hero-title {
+                font-size: 3.3rem;
+            }
+            .hero-subtitle {
+                font-size: 1.6rem;
+            }
+            .section-heading {
+                font-size: 2.8rem;
+                margin-bottom: 50px;
+            }
+            .section-heading.big {
+                font-size: 3rem;
+            }
+            .section-heading::after {
+                width: 140px;
+                bottom: -15px;
+            }
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            .action-btn {
+                width: 100%;
+                max-width: 320px;
+                min-width: auto;
+            }
+            .stats-grid,
+            .roadmap-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            .about-card,
+            .contract-box {
+                padding: 35px 25px;
+            }
+            .chart-header {
+                padding: 25px;
+            }
+            .chart-header h2 {
+                font-size: 1.8rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            #dexscreener-embed {
+                height: 400px;
+            }
+            .community-buttons {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.7rem;
+            }
+            .hero-subtitle {
+                font-size: 1.4rem;
+            }
+            .hero-logo-container {
+                width: 160px;
+                height: 160px;
+                margin-bottom: 40px;
+            }
+            .hero-logo-letter {
+                font-size: 70px;
+            }
+            .section-heading {
+                font-size: 2.3rem;
+            }
+            .section-heading.big {
+                font-size: 2.5rem;
+            }
+            .hero-description {
+                font-size: 1.1rem;
+                margin-bottom: 50px;
+            }
+            .contract-box {
+                padding: 25px 20px;
+            }
+            .address-wrapper {
+                flex-direction: column;
+                gap: 18px;
+                align-items: stretch;
+            }
+            .copy-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .stat-value {
+                font-size: 2.3rem;
+            }
+            .phase-title {
+                font-size: 1.7rem;
+            }
+            .nav-buttons {
+                gap: 10px;
+            }
+            .nav-icon-btn {
+                width: 46px;
+                height: 46px;
+                font-size: 20px;
+            }
+            .buy-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Sparkle Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Header -->
     <header>
-        <nav>
-            <div class="logo">DUDDY</div>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#how-to-buy">How to Buy</a>
-                <a href="#duddynomics">Duddynomics</a>
-                <a href="#buy" class="buy-btn">Buy Now</a>
+        <div class="nav-container">
+            <div class="logo-wrapper">
+                <div class="logo-box">
+                    <div class="logo-letter">D</div>
+                </div>
+                <div class="logo-text">DUDDY</div>
             </div>
-        </nav>
-    </header>
-    
-    <section class="hero">
-        <h1>DUDDY</h1>
-        <img src="duddy-logo.png" alt="DUDDY Logo" class="logo-img">
-        <div class="characters">
-            <!-- Add your dog character images here -->
-            <img src="dog-character1.png" alt="Cool Dog 1">
-            <img src="dog-character2.png" alt="Cool Dog 2">
-            <img src="dog-character3.png" alt="Cool Dog 3">
-            <img src="dog-character4.png" alt="Cool Dog 4">
+            
+            <div class="nav-buttons">
+                <a href="https://t.me/duddyofficial_ddy" target="_blank" class="nav-icon-btn">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                <a href="https://x.com/official_duddy" target="_blank" class="nav-icon-btn x-btn">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+                <a href="https://pump.fun/coin/8M3CJC3QzKbaLcCFmyYZGVVZ5MgPVN9DNQatSLNUpump" target="_blank" class="buy-btn">
+                    <i class="fas fa-bolt"></i> Buy Now
+                </a>
+            </div>
         </div>
-        <p>Just That Thumbs-Up Doggo That Started The Meme Coin Revolution On Solana Chain!</p>
-        <div class="ca">CA: YourContractAddressHereOnSolana</div>
-        <a href="#buy" class="buy-btn" style="margin-top: 20px; display: inline-block; padding: 15px 30px; font-size: 20px;">Buy Now</a>
-    </section>
-    
-    <section id="about" class="section">
-        <h2>About DUDDY</h2>
-        <p>DUDDY is the ultimate meme coin for dog lovers and crypto enthusiasts! With our cool pup rocking shades and a cap, we're here to bring fun, community, and gains to the Solana blockchain. Join the pack and let's moon together!</p>
-    </section>
-    
-    <section id="how-to-buy" class="section">
-        <h2>How to Buy</h2>
-        <ol>
-            <li>Set up a Solana wallet like Phantom.</li>
-            <li>Buy SOL on an exchange and transfer to your wallet.</li>
-            <li>Go to Raydium or Jupiter and swap SOL for DUDDY using our CA.</li>
-            <li>HODL and enjoy the ride!</li>
-        </ol>
-    </section>
-    
-    <section id="duddynomics" class="section">
-        <h2>Duddynomics</h2>
-        <p>Total Supply: 1,000,000,000 DUDDY</p>
-        <p>Liquidity: Burned 🔥</p>
-        <p>Taxes: 0% Buy/Sell</p>
-        <p>Community-Driven: Fair launch, no presale!</p>
-    </section>
-    
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-logo-container">
+                    <div class="hero-logo-glow"></div>
+                    <div class="hero-logo-box">
+                        <div class="hero-logo-letter">DUDDY</div>
+                    </div>
+                </div>
+                
+                <h1 class="hero-title">
+                    <span class="word-du">DUD</span><span class="word-ddy">DY</span>
+                </h1>
+                
+                <div class="hero-subtitle">
+                    Solana meme, one ticker, community built to outlast candles. 🐶
+                </div>
+                
+                <p class="hero-description">
+                    DUDDY is a meme-driven Solana coin with simple flows, and a community that actually shows up for the dog.
+                </p>
+                
+                <!-- Contract Address -->
+                <div class="contract-section">
+                    <span class="contract-label">CA:</span>
+                    <div class="contract-box">
+                        <div class="address-wrapper">
+                            <div class="address-text">
+                                8M3CJC3QzKbaLcCFmyYZGVVZ5MgPVN9DNQatSLNUpump
+                            </div>
+                            <button class="copy-btn" id="copyBtn">
+                                <i class="far fa-copy"></i> Copy Address
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <a href="https://pump.fun/coin/8M3CJC3QzKbaLcCFmyYZGVVZ5MgPVN9DNQatSLNUpump" target="_blank" class="action-btn primary">
+                        <i class="fas fa-bolt"></i> Buy on Pump.fun
+                    </a>
+                    <a href="#chart" class="action-btn secondary">
+                        <i class="fas fa-chart-line"></i> View Live Chart
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="section" id="about">
+            <div class="container">
+                <h2 class="section-heading purple">About DUDDY</h2>
+                <div class="about-card">
+                    <p class="about-text">
+                        DUDDY is revolutionizing the meme coin space with a simple yet powerful approach: 
+                        build a loyal community, deliver consistent value, and create lasting memories. 
+                        Powered by Solana's lightning-fast blockchain, we're here to stay and grow together.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Duddynomics Section -->
+        <section class="section" id="tokenomics">
+            <div class="container">
+                <h2 class="section-heading green">Duddynomics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="stat-value">970,67M</div>
+                        <div class="stat-label">$DDY</div>
+                        <div class="stat-subtext">DUDDY</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="stat-value">BURNED</div>
+                        <div class="stat-label">Liquidity</div>
+                        <div class="stat-subtext">🔥 Forever</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="stat-value">0%</div>
+                        <div class="stat-label">Taxes</div>
+                        <div class="stat-subtext">Buy / Sell</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-value">FAIR</div>
+                        <div class="stat-label">Launch</div>
+                        <div class="stat-subtext">No Presale</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Chart Section -->
+        <section class="section" id="chart">
+            <div class="container">
+                <div class="chart-section">
+                    <div class="chart-header">
+                        <h2><i class="fas fa-chart-line"></i> DUDDY Live Price Chart</h2>
+                        <div class="live-indicator">
+                            <div class="live-dot"></div>
+                            <span>LIVE PRICE UPDATES</span>
+                        </div>
+                    </div>
+                    
+                    <!-- DexScreener Chart Embed -->
+                    <div id="dexscreener-embed">
+                        <iframe src="https://dexscreener.com/solana/GirbxfnK5RwQaXHj5qAXQPwdJsmGyLiGSckhnXzRBiN1?embed=1&theme=dark&chartStyle=0&chartType=usd"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap Section -->
+        <section class="section" id="roadmap">
+            <div class="container">
+                <h2 class="section-heading purple big">Roadmap</h2>
+                <div class="roadmap-grid">
+                    <div class="roadmap-card">
+                        <div class="phase-badge">Phase 1 — Launch</div>
+                        <h3 class="phase-title">Foundation</h3>
+                        <ul class="phase-items">
+                            <li class="phase-item">
+                                <i class="fas fa-bolt"></i>
+                                <span>Token Launch on Pump.fun</span>
+                            </li>
+                            <li class="phase-item">
+                                <i class="fas fa-bolt"></i>
+                                <span>Community Building</span>
+                            </li>
+                            <li class="phase-item">
+                                <i class="fas fa-bolt"></i>
+                                <span>Social Media Presence</span>
+                            </li>
+                            <li class="phase-item">
+                                <i class="fas fa-bolt"></i>
+                                <span>Website Launch</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="roadmap-card">
+                        <div class="phase-badge">Phase 2 — Growth</div>
+                        <h3 class="phase-title">Expansion</h3>
+                        <ul class="phase-items">
+                            <li class="phase-item">
+                                <i class="fas fa-bolt"></i>
+                                <span>5,000+ Holders</span>
+                            </li>
+                            <li class="phase-item">
+                                <i class="fas fa-bolt"></i>
+                                <span>CEX Listings</span>
+                            </li>
+                            <li class="phase-item">
+                                <i class="fas fa-bolt"></i>
+                                <span>Influencer Partnerships</span>
+                            </li>
+                            <li class="phase-item">
+                                <i class="fas fa-bolt"></i>
+                                <span>NFT Collection</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="roadmap-card">
+                        <div class="phase-badge">Phase 3 — Expansion</div>
+                        <h3 class="phase-title">Scale</h3>
+                        <ul class="phase-items">
+                            <li class="phase-item">
+                                <i class="fas fa-bolt"></i>
+                                <span>Major CEX Listings</span>
+                            </li>
+                            <li class="phase-item">
+                                <i class="fas fa-bolt"></i>
+                                <span>DUDDY Merchandise</span>
+                            </li>
+                            <li class="phase-item">
+                                <i class="fas fa-bolt"></i>
+                                <span>Charity Initiatives</span>
+                            </li>
+                            <li class="phase-item">
+                                <i class="fas fa-bolt"></i>
+                                <span>Global Marketing</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="roadmap-card">
+                        <div class="phase-badge">Phase 4 — Moon</div>
+                        <h3 class="phase-title">Dominance</h3>
+                        <ul class="phase-items">
+                            <li class="phase-item">
+                                <i class="fas fa-bolt"></i>
+                                <span>Mass Adoption</span>
+                            </li>
+                            <li class="phase-item">
+                                <i class="fas fa-bolt"></i>
+                                <span>DUDDY Ecosystem</span>
+                            </li>
+                            <li class="phase-item">
+                                <i class="fas fa-bolt"></i>
+                                <span>DAO Governance</span>
+                            </li>
+                            <li class="phase-item">
+                                <i class="fas fa-bolt"></i>
+                                <span>To The Moon! 🚀</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Section -->
+        <section class="section" id="community">
+            <div class="container">
+                <h2 class="section-heading green">
+                    <span style="color: white;">Join The </span>
+                    <span style="color: var(--primary-green);">DUDDY</span>
+                    <span style="color: white;"> Community</span>
+                </h2>
+                
+                <div class="community-buttons">
+                    <a href="https://t.me/duddyofficial_ddy" target="_blank" class="community-btn btn-telegram">
+                        <i class="fab fa-telegram"></i> Telegram
+                    </a>
+                    
+                    <a href="https://x.com/official_duddy" target="_blank" class="community-btn btn-x">
+                        <i class="fab fa-x-twitter"></i> X (Twitter)
+                    </a>
+                    
+                    <a href="https://duddy.fun" target="_blank" class="community-btn btn-webapp">
+                        <i class="fas fa-external-link-alt"></i> Web App
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
     <footer>
-        &copy; 2026 DUDDY. All rights reserved. | <a href="#">Twitter</a> | <a href="#">Telegram</a> | <a href="#">Discord</a>
+        <div class="container">
+            <div class="footer-logo">
+                <div class="footer-logo-box">
+                    <div class="footer-logo-letter">D</div>
+                </div>
+            </div>
+            
+            <p class="footer-text">
+                © 2026 DUDDY. All rights reserved. Not financial advice.
+            </p>
+            
+            <div class="footer-social">
+                <a href="https://t.me/duddyofficial_ddy" target="_blank" class="nav-icon-btn">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                <a href="https://x.com/official_duddy" target="_blank" class="nav-icon-btn x-btn">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+            </div>
+        </div>
     </footer>
+
+    <!-- Particle.js Library -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <script>
+        // Initialize particle background
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: ["#00ff88", "#9d4edd", "#4dffaa", "#b87eff"] },
+                    shape: { type: "circle" },
+                    opacity: { 
+                        value: 0.5,
+                        random: true,
+                        anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
+                    },
+                    size: { 
+                        value: 3, 
+                        random: true,
+                        anim: { enable: true, speed: 2, size_min: 0.5, sync: false }
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: "rgba(0, 255, 136, 0.2)",
+                        opacity: 0.3,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 1,
+                        direction: "none",
+                        random: true,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false,
+                        attract: { enable: false, rotateX: 600, rotateY: 1200 }
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: { enable: true, mode: "repulse" },
+                        onclick: { enable: true, mode: "push" },
+                        resize: true
+                    }
+                },
+                retina_detect: true
+            });
+        });
+
+        // Copy to clipboard functionality
+        const copyBtn = document.getElementById('copyBtn');
+        const contractAddress = "8M3CJC3QzKbaLcCFmyYZGVVZ5MgPVN9DNQatSLNUpump";
+        
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(contractAddress).then(() => {
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                copyBtn.classList.add('copied');
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add subtle animation to cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe cards for animation
+        document.querySelectorAll('.stat-card, .roadmap-card, .about-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>
